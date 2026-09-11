@@ -40,5 +40,7 @@ export function drainEvents(ctx: RapierContext): void {
         dispatchSide(a, b, sensor, started);
         dispatchSide(b, a, sensor, started);
     });
+    // Drop every reference: the payload must not keep removed colliders alive.
     payload.target = payload.other = null;
+    payload.targetCollider = payload.otherCollider = null as unknown as CollisionPayload['targetCollider'];
 }

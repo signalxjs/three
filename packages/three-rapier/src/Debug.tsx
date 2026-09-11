@@ -11,7 +11,11 @@ import { useRapier } from './context.js';
 export const Debug = component((ctx) => {
     const rapier = useRapier();
     const geometry = new BufferGeometry();
-    let capacity = 0;
+    // Attributes exist from the start (an empty world renders zero segments).
+    let capacity = 3;
+    geometry.setAttribute('position', new BufferAttribute(new Float32Array(capacity), 3));
+    geometry.setAttribute('color', new BufferAttribute(new Float32Array((capacity / 3) * 4), 4));
+    geometry.setDrawRange(0, 0);
 
     useFrame(() => {
         const world = rapier.world;
