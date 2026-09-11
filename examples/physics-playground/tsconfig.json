@@ -1,0 +1,20 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "jsxImportSource": "sigx",
+        "types": ["node"],
+        "noEmit": true
+    },
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "../../env.d.ts"
+    ],
+    // The root config excludes `examples`; inheriting that would empty this
+    // program (tsgo passes on TS18003). Override it.
+    "exclude": [
+        "node_modules",
+        "**/dist"
+    ]
+}
