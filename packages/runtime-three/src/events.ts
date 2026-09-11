@@ -14,6 +14,7 @@
  */
 import type { AppContext } from '@sigx/runtime-core';
 import { handleComponentError } from '@sigx/runtime-core/internals';
+import { Vector3 } from 'three';
 import type { Camera, Intersection, Object3D, Ray, Vector2 } from 'three';
 import { nodeOf, type EventInvoker, type ThreeNode } from './node.js';
 import type { ThreeRoot, ThreeState } from './root.js';
@@ -225,6 +226,9 @@ export function createEventManager(root: ThreeRoot, options: EventsOptions): Eve
     let hovered = new Set<ThreeNode>();
     let hoveredNext = new Set<ThreeNode>();
     const captured = new Map<number, ThreeNode>();
+    // Reused for the captured-pointer path: no per-event allocation.
+    const captureHit = { distance: 0, point: new Vector3(), object: null as unknown as Object3D } as Intersection<Object3D>;
+    const captureList: Intersection<Object3D>[] = [captureHit];
     let downX = 0;
     let downY = 0;
 
@@ -263,7 +267,15 @@ export function createEventManager(root: ThreeRoot, options: EventsOptions): Eve
                 }
                 if (own !== null) break;
             }
-            result = [own ?? { distance: 0, point: state.raycaster.ray.origin.clone(), object: captor.object } as Intersection<Object3D>];
+            if (own === null) {
+                captureHit.distance = 0;
+                captureHit.point.copy(state.raycaster.ray.origin);
+                captureHit.object = captor.object;
+                captureList[0] = captureHit;
+            } else {
+                captureList[0] = own;
+            }
+            result = captureList;
         }
         hits = result;
         return result;
