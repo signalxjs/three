@@ -53,8 +53,6 @@
         "dist"
     ],
     "sideEffects": [
-        "./src/platform.ts",
-        "./src/jsx-runtime.ts",
         "./dist/platform.js",
         "./dist/platform.prod.js",
         "./dist/platform-*.js",

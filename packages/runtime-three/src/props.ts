@@ -192,6 +192,7 @@ export function setProp(node: ThreeNode, key: string, _prev: unknown, next: unkn
                 unplaceChild(node);
                 placeChild(parent, node);
             }
+            invalidate(node);
             return;
         }
         case 'dispose':
@@ -209,6 +210,7 @@ export function setProp(node: ThreeNode, key: string, _prev: unknown, next: unkn
             return;
         case 'userData':
             if (next !== null && next !== undefined) Object.assign(object.userData, toRaw(next));
+            invalidate(node);
             return;
     }
 
