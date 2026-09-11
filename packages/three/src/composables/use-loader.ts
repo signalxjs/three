@@ -118,6 +118,14 @@ export function preload<L extends LoaderCtor>(Loader: L, url: string | string[],
     })).then(() => {});
 }
 
+/** Detach an entry: an in-flight load's settle handlers see a foreign promise and ignore the result. */
+function cancel(entry: Entry): void {
+    disposeValue(entry.value);
+    entry.promise = null;
+    entry.value = undefined;
+    entry.error = undefined;
+}
+
 function disposeValue(value: unknown): void {
     if (value === null || typeof value !== 'object') return;
     const v = value as { dispose?: () => void; scene?: { traverse?: (fn: (o: any) => void) => void } };
@@ -140,20 +148,20 @@ function disposeValue(value: unknown): void {
  */
 export function clearLoaderCache(Loader?: LoaderCtor, url?: string): void {
     if (Loader === undefined) {
-        for (const byUrl of cache.values()) for (const e of byUrl.values()) disposeValue(e.value);
+        for (const byUrl of cache.values()) for (const e of byUrl.values()) cancel(e);
         cache.clear();
         return;
     }
     const byUrl = cache.get(Loader);
     if (byUrl === undefined) return;
     if (url === undefined) {
-        for (const e of byUrl.values()) disposeValue(e.value);
+        for (const e of byUrl.values()) cancel(e);
         cache.delete(Loader);
         return;
     }
     const e = byUrl.get(url);
     if (e !== undefined) {
-        disposeValue(e.value);
+        cancel(e);
         byUrl.delete(url);
     }
 }

@@ -8,7 +8,7 @@ export type Binding =
     | 'GamepadA' | 'GamepadB' | 'GamepadX' | 'GamepadY'
     | 'GamepadLB' | 'GamepadRB' | 'GamepadLT' | 'GamepadRT'
     | 'GamepadBack' | 'GamepadStart' | 'GamepadLS' | 'GamepadRS'
-    | 'GamepadUp' | 'GamepadDown' | 'GamepadLeft' | 'GamepadRight';
+    | 'GamepadUp' | 'GamepadDown' | 'GamepadLeft' | 'GamepadRight' | 'GamepadHome';
 
 export interface AxisBinding {
     /** Bindings that pull the axis to -1. */
@@ -43,7 +43,8 @@ const GAMEPAD_NAMES: Record<string, number> = {
     GamepadA: GamepadButton.A, GamepadB: GamepadButton.B, GamepadX: GamepadButton.X, GamepadY: GamepadButton.Y,
     GamepadLB: GamepadButton.LB, GamepadRB: GamepadButton.RB, GamepadLT: GamepadButton.LT, GamepadRT: GamepadButton.RT,
     GamepadBack: GamepadButton.Back, GamepadStart: GamepadButton.Start, GamepadLS: GamepadButton.LS, GamepadRS: GamepadButton.RS,
-    GamepadUp: GamepadButton.Up, GamepadDown: GamepadButton.Down, GamepadLeft: GamepadButton.Left, GamepadRight: GamepadButton.Right
+    GamepadUp: GamepadButton.Up, GamepadDown: GamepadButton.Down, GamepadLeft: GamepadButton.Left, GamepadRight: GamepadButton.Right,
+    GamepadHome: GamepadButton.Home
 };
 
 interface Resolved {

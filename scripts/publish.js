@@ -42,6 +42,11 @@ const args = process.argv.slice(2);
 const dryRun = args.includes('--dry-run');
 const tagIndex = args.indexOf('--tag');
 const tag = tagIndex !== -1 ? args[tagIndex + 1] : null;
+if (tagIndex !== -1 && (!tag || tag.startsWith('--'))) {
+    // Fail fast: a missing value would silently publish under `latest`.
+    console.error('❌ --tag needs a value, e.g. --tag beta');
+    process.exit(1);
+}
 const provenance = args.includes('--provenance');
 const allowDirty = args.includes('--allow-dirty');
 
