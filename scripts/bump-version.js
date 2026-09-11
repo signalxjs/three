@@ -11,7 +11,9 @@ const force = process.argv.includes('--force');
 const arg = args[0] || 'patch';
 
 // Check if arg is a version number (e.g., "0.2.0") or bump type
-const isExactVersion = /^\d+\.\d+\.\d+/.test(arg);
+// Anchored: `0.1.0foo` must not be written into package.json as a version.
+// Pre-release / build metadata (`1.0.0-rc.1`, `1.0.0+build.5`) are allowed.
+const isExactVersion = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/.test(arg);
 const bumpType = isExactVersion ? null : arg;
 const exactVersion = isExactVersion ? arg : null;
 

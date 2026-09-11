@@ -18,7 +18,7 @@
  */
 import type * as THREE from 'three';
 import type { JSXChildren } from '@sigx/runtime-core';
-import type { ThreeEvent } from './events.js';
+import type { NativePointerLike, ThreeEvent } from './events.js';
 import type { ObjectRef } from './hooks.js';
 import type { AttachType, ThreeNode } from './node.js';
 
@@ -40,10 +40,20 @@ export type MathValue<T> =
 /** A prop value or a reactive source of it: signal / computed (`{ value }`), getter, or the value itself. */
 export type Bindable<T> = T | { readonly value: T } | (() => T);
 
-type NonFunctionKeys<O> = { [K in keyof O]: O[K] extends (...args: any[]) => any ? never : K }[keyof O];
+type IfEquals<X, Y, A, B> = (<T>() => T extends X ? 1 : 2) extends (<T>() => T extends Y ? 1 : 2) ? A : B;
+/** Math-typed properties are `readonly` in three's typings (fixed identity) but are SET IN PLACE by the renderer. */
+type InPlaceValue = THREE.Vector2 | THREE.Vector3 | THREE.Vector4 | THREE.Euler | THREE.Quaternion | THREE.Matrix3 | THREE.Matrix4 | THREE.Color | THREE.Layers;
+/** Keys a prop can drive: writable non-methods, plus readonly math objects (updated in place). */
+type PropKeys<O> = {
+    [K in keyof O]-?: O[K] extends (...args: any[]) => any
+        ? never
+        : NonNullable<O[K]> extends InPlaceValue
+            ? K
+            : IfEquals<{ [Q in K]: O[K] }, { -readonly [Q in K]: O[K] }, K, never>;
+}[keyof O];
 
-/** Every non-function property, optional and bindable, with math coercion. */
-export type Mutable<O> = { [K in NonFunctionKeys<O>]?: Bindable<MathValue<O[K]>> };
+/** Every drivable property, optional and bindable, with math coercion. */
+export type Mutable<O> = { [K in PropKeys<O>]?: Bindable<MathValue<O[K]>> };
 
 /** Pointer events, by raycast. Only objects with handlers are raycast. */
 export interface EventHandlers {
@@ -58,8 +68,8 @@ export interface EventHandlers {
     onPointerEnter?: (event: ThreeEvent) => void;
     onPointerLeave?: (event: ThreeEvent) => void;
     onPointerCancel?: (event: ThreeEvent) => void;
-    /** A click that hit nothing with a handler. Receives the native event. */
-    onPointerMissed?: (event: Event) => void;
+    /** A click that hit nothing with a handler. Receives the native event (a `MouseEvent` in the browser). */
+    onPointerMissed?: (event: NativePointerLike) => void;
     onWheel?: (event: ThreeEvent<WheelEvent>) => void;
 }
 
