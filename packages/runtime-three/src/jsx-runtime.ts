@@ -4,4 +4,5 @@
  * factory. DOM apps with `<Canvas>` keep `jsxImportSource: "sigx"` instead.
  */
 import './platform.js';
+import './jsx-types.js';
 export { jsx, jsxs, jsxDEV, Fragment } from '@sigx/runtime-core';

@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "packageManager": "pnpm@10.33.4",
-    "description": "SignalX three.js — a performant three.js renderer, <Canvas> bridge, composables and Rapier physics for building games with sigx",
+    "description": "SignalX three.js \u2014 a performant three.js renderer, <Canvas> bridge, composables and Rapier physics for building games with sigx",
     "type": "module",
     "engines": {
         "node": "^20.19.0 || >=22.12.0"
@@ -39,9 +39,11 @@
         "dev:cube": "pnpm --filter @sigx-examples/three-spinning-cube dev",
         "dev:hud": "pnpm --filter @sigx-examples/three-game-hud dev",
         "dev:physics": "pnpm --filter @sigx-examples/three-physics-playground dev",
-        "clean": "node scripts/clean.mjs"
+        "clean": "node scripts/clean.mjs",
+        "bench:alloc": "node --expose-gc scripts/alloc.mjs"
     },
     "devDependencies": {
+        "@sigx/runtime-dom": "catalog:",
         "@size-limit/preset-small-lib": "^11",
         "@types/node": "^22.0.0",
         "@types/three": "^0.185.4",

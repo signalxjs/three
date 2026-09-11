@@ -5,8 +5,8 @@
 The three.js renderer for [SignalX](https://sigx.dev): scene-graph host ops on
 top of `@sigx/runtime-core`'s renderer-agnostic component model, a
 priority-sorted frame loop with fixed-step updates and demand rendering,
-signal-bound props, and (coming) raycast pointer events and the JSX intrinsic
-element types.
+signal-bound props, raycast pointer events, and the JSX intrinsic element
+types for the whole `three` namespace.
 
 Most apps install [`@sigx/three`](../three) instead — it pulls this package in,
 registers the whole `three` namespace as JSX elements, and adds `<Canvas>` for
@@ -107,6 +107,37 @@ Demand mode: every prop write, tree change and `invalidate()` requests a
 frame; requests coalesce. A subscriber with `priority > 0` takes over
 rendering (call `state.gl.render` yourself).
 
+### Pointer events
+
+`onClick`, `onContextMenu`, `onDoubleClick`, `onPointerDown/Up/Move`,
+`onPointerOver/Out/Enter/Leave`, `onPointerCancel`, `onWheel` on any
+`Object3D` element, plus `onPointerMissed` (a click that hit nothing). One set
+of listeners per root on the canvas; on each native event the pointer is
+projected to NDC and **only objects that have handlers** are raycast. Hits
+bubble up the tree (a `<group onClick>` catches its children's hits);
+`event.stopPropagation()` ends the bubble and skips farther hits. The event is
+the three.js intersection plus `nativeEvent`, `eventObject`, `intersections`,
+`pointer`, `ray`, `camera`, `delta` (pixels since pointerdown — ignore drags),
+`setPointerCapture(id)` / `releasePointerCapture(id)`. `raycast={null}` takes
+an object out of picking; pass `events={{ filter }}` to post-process hits, or
+`events={false}` to turn the whole thing off. three-mesh-bvh works through
+`raycast={acceleratedRaycast}` and `raycaster.firstHitOnly`.
+
+### Types
+
+Every `three` class is typed as a JSX element: its writable properties (with
+tuple/scalar/instance coercion for math types, and any of them bindable to a
+signal), `args` from the constructor signature, `attach`, `ref`, `dispose`,
+`raycast`, `userData`, the pointer events on `Object3D`s, and dashed paths.
+Both renderers' intrinsics merge in one program, so a `<Canvas>` app types
+HTML and three elements side by side. Register your own classes:
+
+```ts
+declare module '@sigx/runtime-three' {
+    interface ThreeElements { orbitControls: ThreeElement<typeof OrbitControls> }
+}
+```
+
 ## Performance rules
 
 1. Per-frame work goes in `useFrame` / `useFixedUpdate` against real objects
@@ -121,6 +152,20 @@ rendering (call `state.gl.render` yourself).
 6. `args` changes reconstruct; hoist the array.
 7. Thousands of the same thing → `<instancedMesh>` / `<batchedMesh>`.
 8. The renderer's own per-frame path allocates nothing; keep yours that way too.
+
+Measured (`pnpm bench`, 10k meshes, one frame, Node 22 on a laptop):
+
+| Path | Per frame |
+| --- | --- |
+| (a) `useFrame` writing 10k `position.x` through refs | 0.15 ms |
+| (b2) 100 of 10k signal-bound `position-x` change | 0.21 ms |
+| (b) all 10k signal-bound `position-x` change (one `batch`) | 34 ms |
+| (c) component re-render + vnode diff of 10k meshes | 16 ms |
+
+Bound props cost per *changed* value; a re-render costs per element in the
+component regardless of how many changed — which is why (b2) beats (c) by
+~80× and (b) does not. Per-frame heap growth on (a) and (b) is at noise
+level (`pnpm bench:alloc`: 13 B and −5 B per frame).
 
 ## Entries
 

@@ -8,7 +8,7 @@ import { stopBindings } from './bindings.js';
 import { PRIMITIVE_TAG, resolveConstructor } from './catalog.js';
 import { ensureObject } from './construct.js';
 import { clearHandlers, ensureRegistered } from './events.js';
-import { linkBefore, NodeKind, ThreeNode, unlink } from './node.js';
+import { adoptRoot, linkBefore, NodeKind, ThreeNode, unlink } from './node.js';
 import { setProp } from './props.js';
 import { warnOnce } from './utils.js';
 
@@ -58,7 +58,7 @@ export const nodeOps: RendererOptions<ThreeNode, ThreeNode> = {
         // A keyed move / re-parent: unlink first.
         if (child.parent !== null) unlink(child);
         linkBefore(parent, child, anchor ?? null);
-        if (parent.root !== null) child.root = parent.root;
+        if (parent.root !== null && child.root !== parent.root) adoptRoot(child, parent.root, ensureRegistered);
 
         if (child.kind !== NodeKind.Element) {
             if (child.kind === NodeKind.Text) warnText(parent, child.text);
@@ -70,7 +70,6 @@ export const nodeOps: RendererOptions<ThreeNode, ThreeNode> = {
         if (parent.kind === NodeKind.Element) ensureObject(parent);
         ensureObject(child);
         if (parent.object !== null) placeChild(parent, child);
-        if (child.root !== null) ensureRegistered(child);
         invalidateFrom(parent);
     },
 

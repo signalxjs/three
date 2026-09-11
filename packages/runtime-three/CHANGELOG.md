@@ -31,3 +31,14 @@ follow [Semantic Versioning](https://semver.org/).
   `ROOT_TOKEN`; `threeMount` (default mount only via `./platform`).
 - Entries: `.`, `./internals`, `./platform`, `./jsx-runtime`,
   `./jsx-dev-runtime`, `./webgl`, `./webgpu`.
+- Pointer events by raycast: one listener set per root, only objects with
+  handlers are raycast, bubbling with `stopPropagation`, hover
+  over/out/enter/leave tracking, `delta` since pointerdown, pointer capture,
+  `onPointerMissed`, `onWheel`/`onContextMenu`/`onDoubleClick`, a hit
+  `filter`, errors routed through `handleComponentError`.
+- JSX intrinsic element types for the whole `three` namespace
+  (`ThreeElement`, `ThreeElements` augmentation seam, `Bindable`, `MathValue`)
+  merged into the global `JSX.IntrinsicElements`; a mixed-renderer type test
+  with `@sigx/runtime-dom`.
+- Benchmarks (`pnpm bench`: mount, per-frame update paths, keyed reorder,
+  instancing) and the per-frame allocation check (`pnpm bench:alloc`).

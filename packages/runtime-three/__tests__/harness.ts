@@ -26,6 +26,9 @@ export function fakeGL(): FakeGL {
         disposed: 0,
         shadowMap: { enabled: false, type: 0 },
         render(scene, camera) {
+            // A real renderer refreshes world matrices before drawing.
+            scene.updateMatrixWorld();
+            camera.updateMatrixWorld();
             gl.calls.push([scene, camera]);
         },
         setSize(w, h) {
