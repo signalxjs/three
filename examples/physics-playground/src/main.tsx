@@ -110,7 +110,7 @@ const Hud = component(() => () => (
 
 const App = component(() => () => (
     <>
-        <Canvas camera={{ position: [10, 10, 14], fov: 45 }} shadows>
+        <Canvas camera={{ position: [10, 10, 14], fov: 45, lookAt: [0, 1, 0] }} shadows>
             <Scene />
         </Canvas>
         <Hud />

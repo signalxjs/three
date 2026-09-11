@@ -32,12 +32,15 @@ describe('root', () => {
         t2.unmount();
     });
 
-    it('camera options build a PerspectiveCamera at the given position', () => {
-        const t = createTestRoot({ camera: { fov: 50, position: [1, 2, 3], near: 1, far: 10 } });
+    it('camera options build a PerspectiveCamera at the given position, looking at a point', () => {
+        const t = createTestRoot({ camera: { fov: 50, position: [0, 0, 10], near: 1, far: 100, lookAt: [10, 0, 10] } });
         const cam = t.state.camera as THREE.PerspectiveCamera;
         expect(cam.fov).toBe(50);
         expect(cam.near).toBe(1);
-        expect(cam.position.toArray()).toEqual([1, 2, 3]);
+        expect(cam.position.toArray()).toEqual([0, 0, 10]);
+        const dir = cam.getWorldDirection(new THREE.Vector3());
+        expect(dir.x).toBeCloseTo(1);
+        expect(dir.z).toBeCloseTo(0);
         t.unmount();
     });
 

@@ -72,7 +72,7 @@ services freely.
 
 | Prop | |
 | --- | --- |
-| `camera` | A camera instance or `{ fov, near, far, position, manual }` (default perspective at z = 5) |
+| `camera` | A camera instance or `{ fov, near, far, position, lookAt, manual }` (default perspective at z = 5 looking down −Z) |
 | `gl` | A renderer instance, `WebGLRenderer` params, or a factory (`webgl()` / `webgpu()` from `@sigx/runtime-three/webgl` & `/webgpu`) |
 | `scene`, `shadows`, `dpr`, `fixedStep` | Forwarded to `createRoot` |
 | `frameloop` | `'always'` (default) · `'demand'` (render on `invalidate()`) · `'never'` (only `advance()`) |

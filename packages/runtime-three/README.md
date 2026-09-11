@@ -94,7 +94,7 @@ object (never disposed, never reconstructed).
 
 Options: `gl` (instance, factory — `webgl()` / `webgpu()` from the subpath
 entries — or `WebGLRenderer` params), `camera` (instance or
-`{ fov, near, far, position, manual }`), `scene`, `shadows`, `dpr`, `frameloop`
+`{ fov, near, far, position, lookAt, manual }`), `scene`, `shadows`, `dpr`, `frameloop`
 (`'always' | 'demand' | 'never'`), `size`, `fixedStep`, `maxDelta`, `raycaster`,
 `scheduler`, `onCreated`.
 

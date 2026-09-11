@@ -20,6 +20,8 @@ export interface CameraOptions {
     near?: number;
     far?: number;
     position?: [number, number, number];
+    /** Point the camera at a world position once created (a camera looks down -Z by default). */
+    lookAt?: [number, number, number];
     /** Skip the automatic aspect/projection update on resize. */
     manual?: boolean;
 }
@@ -178,6 +180,7 @@ export function createRoot(target: HTMLCanvasElement | HTMLElement | null, optio
         const cam = new PerspectiveCamera(o.fov ?? 75, initialWidth / initialHeight, o.near ?? 0.1, o.far ?? 1000);
         if (o.position) cam.position.set(o.position[0], o.position[1], o.position[2]);
         else cam.position.z = 5;
+        if (o.lookAt) cam.lookAt(o.lookAt[0], o.lookAt[1], o.lookAt[2]);
         cameraManual = o.manual === true;
         camera = cam;
     }
