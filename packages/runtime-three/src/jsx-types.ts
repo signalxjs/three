@@ -41,13 +41,19 @@ export type MathValue<T> =
 export type Bindable<T> = T | { readonly value: T } | (() => T);
 
 type IfEquals<X, Y, A, B> = (<T>() => T extends X ? 1 : 2) extends (<T>() => T extends Y ? 1 : 2) ? A : B;
-/** Keys that are neither `readonly` nor methods — what a prop can actually assign. */
-type WritableKeys<O> = {
-    [K in keyof O]-?: O[K] extends (...args: any[]) => any ? never : IfEquals<{ [Q in K]: O[K] }, { -readonly [Q in K]: O[K] }, K, never>;
+/** Math-typed properties are `readonly` in three's typings (fixed identity) but are SET IN PLACE by the renderer. */
+type InPlaceValue = THREE.Vector2 | THREE.Vector3 | THREE.Vector4 | THREE.Euler | THREE.Quaternion | THREE.Matrix3 | THREE.Matrix4 | THREE.Color | THREE.Layers;
+/** Keys a prop can drive: writable non-methods, plus readonly math objects (updated in place). */
+type PropKeys<O> = {
+    [K in keyof O]-?: O[K] extends (...args: any[]) => any
+        ? never
+        : NonNullable<O[K]> extends InPlaceValue
+            ? K
+            : IfEquals<{ [Q in K]: O[K] }, { -readonly [Q in K]: O[K] }, K, never>;
 }[keyof O];
 
-/** Every writable non-function property, optional and bindable, with math coercion. */
-export type Mutable<O> = { [K in WritableKeys<O>]?: Bindable<MathValue<O[K]>> };
+/** Every drivable property, optional and bindable, with math coercion. */
+export type Mutable<O> = { [K in PropKeys<O>]?: Bindable<MathValue<O[K]>> };
 
 /** Pointer events, by raycast. Only objects with handlers are raycast. */
 export interface EventHandlers {
