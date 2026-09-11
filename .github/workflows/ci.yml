@@ -34,6 +34,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # All publishable packages ship in lockstep on one version line.
+      - name: Check version lockstep
+        run: pnpm version:check
+
       - name: Lint
         run: pnpm lint
 
@@ -44,6 +48,10 @@ jobs:
 
       - name: Typecheck
         run: pnpm typecheck
+
+      # Each example against its OWN tsconfig — the copy-paste surface.
+      - name: Typecheck examples
+        run: pnpm typecheck:examples
 
       - name: Build
         run: pnpm build

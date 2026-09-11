@@ -56,3 +56,7 @@ coverage/
 .cache/
 .temp/
 .tmp/
+
+# Hand-written ambient declarations (the *.d.ts rule above is for emitted output)
+!env.d.ts
+!packages/*/src/*.d.ts

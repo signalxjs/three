@@ -1,4 +1,4 @@
-# Contributing to SignalX <REPO>
+# Contributing to SignalX three
 
 Thanks for your interest! This repo is part of the
 [`signalxjs`](https://github.com/signalxjs) family. It follows the **sigx
@@ -17,14 +17,15 @@ We use the standard `main` / `branches` worktree layout. Clone the primary
 checkout into a `main` folder:
 
 ```bash
-git clone https://github.com/signalxjs/<REPO>.git <REPO>/main
-cd <REPO>/main
+git clone https://github.com/signalxjs/three.git three/main
+cd three/main
 pnpm install
 pnpm build
 ```
 
-> The `build` step is required before tests when packages consume each other's
-> `dist/` output through the workspace.
+> Tests and typecheck resolve packages to source through path aliases, so
+> `build` is only required for `pnpm size`, `pnpm verify:pack` and the
+> examples' `dev` servers (they consume `dist/` through the workspace link).
 
 ## Working on a change
 
@@ -48,6 +49,10 @@ parallel checkouts.
 | Tests in watch mode | `pnpm test:watch` |
 | Typecheck | `pnpm typecheck` |
 | Lint | `pnpm lint` |
+| Typecheck the examples | `pnpm typecheck:examples` |
+| Benchmarks | `pnpm bench` |
+| Bundle size | `pnpm size` (after `pnpm build`) |
+| Run an example | `pnpm dev:cube`, `pnpm dev:hud`, `pnpm dev:physics` |
 
 ## Pre-push checklist
 
@@ -58,7 +63,12 @@ pnpm lint
 pnpm typecheck
 pnpm test
 pnpm build
+pnpm verify:catalog
 ```
+
+Touching a hot path (anything under `useFrame`, `patchProp`, the frame loop,
+event dispatch, physics sync)? Also run `pnpm bench` and keep per-frame
+allocations at zero — see the package README's "Performance rules".
 
 ## Pull request guidelines
 
@@ -73,8 +83,8 @@ pnpm build
 
 ## Reporting bugs and requesting features
 
-- **Bug?** Open an issue with the [bug report template](https://github.com/signalxjs/<REPO>/issues/new?template=bug_report.yml). A minimal reproduction helps a lot.
-- **Feature idea?** Use the [feature request template](https://github.com/signalxjs/<REPO>/issues/new?template=feature_request.yml).
+- **Bug?** Open an issue with the [bug report template](https://github.com/signalxjs/three/issues/new?template=bug_report.yml). A minimal reproduction helps a lot.
+- **Feature idea?** Use the [feature request template](https://github.com/signalxjs/three/issues/new?template=feature_request.yml).
 
 ## Code of conduct
 

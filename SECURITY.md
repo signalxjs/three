@@ -7,7 +7,7 @@
 Use one of the following private channels:
 
 1. **GitHub Security Advisories** — preferred. Open a private report at
-   <https://github.com/signalxjs/<REPO>/security/advisories/new>.
+   <https://github.com/signalxjs/three/security/advisories/new>.
 2. **Email** — contact the maintainer directly: **Andreas Ekdahl**
    <andy@ekdahls.net>.
 
@@ -27,5 +27,5 @@ Please include:
 
 ## Supported versions
 
-<!-- TODO(sigx-standard): set the supported version line for this repo. -->
+Only the latest `0.x` minor of each package receives security fixes.
 Security fixes are applied to the latest released minor line.

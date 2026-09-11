@@ -17,15 +17,15 @@ body:
     validations:
       required: true
 
-  # TODO(sigx-standard): list this repo's packages, or delete this dropdown if
-  # the repo ships a single package.
   - type: dropdown
     id: packages
     attributes:
       label: Affected package(s)
       multiple: true
       options:
-        - "@sigx/<package>"
+        - "@sigx/three"
+        - "@sigx/runtime-three"
+        - "@sigx/three-rapier"
         - Not sure / multiple
     validations:
       required: true

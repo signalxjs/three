@@ -1,4 +1,4 @@
-# SignalX <REPO> — shared agent guide
+# SignalX three — shared agent guide
 
 > ⚠️ **BRANCH FIRST — never work on `main`.** Before touching ANY file, create a
 > worktree (`pnpm wt new <N-short-slug>`) and do everything from
@@ -21,17 +21,23 @@ This is the sigx standard agent setup. The same pattern (this file +
 it originates in [`signalxjs/repo-template`](https://github.com/signalxjs/repo-template).
 See "Adopting this setup in another sigx repo" at the bottom.
 
-<!-- TODO(sigx-standard): replace this paragraph with what THIS repo is. Example: -->
-SignalX (sigx) <REPO> is a pnpm monorepo (ESM, `"type": "module"`) of the
-packages under `packages/`. Tech stack: TypeScript (strict), Vite, Vitest,
-oxlint. Published to npm under the `@sigx` scope.
-<!-- Single-package repo? Say so here ("…is a single npm package, not a workspace")
-     and drop the workspace/`--filter` bits from "Build, Test, Lint" and "Packages". -->
+SignalX `three` (`signalxjs/three`) — three.js for SignalX. A pnpm monorepo
+(ESM, `"type": "module"`) with the packages under `packages/` and runnable
+example apps under `examples/`. Tech stack: TypeScript (strict), Vite 8,
+Vitest (node environment; happy-dom per file), oxlint; published to npm under
+the `@sigx` scope. `three` and `@dimforge/rapier3d-compat` are peer
+dependencies of the published packages — never bundled.
+
+Performance is the headline requirement: the renderer's per-frame paths
+allocate nothing, `useFrame` + refs mutate three objects directly, signal-bound
+props write to the object without re-rendering the component, and rendering is
+on demand. Read each package's README "Performance rules" before touching a hot
+path, and keep `pnpm bench` + `scripts/alloc.mjs` green.
 
 ## Development workflow (issue → PR → Copilot review → merge)
 
 **This is mandatory for EVERY agent-driven change — including one-line fixes.
-Never commit straight to `main`.** Repo: `signalxjs/<REPO>`, base branch `main`.
+Never commit straight to `main`.** Repo: `signalxjs/three`, base branch `main`.
 (Human contributors follow `CONTRIBUTING.md`, where an issue is optional; for
 agents the issue-first flow below is required.)
 
@@ -69,7 +75,7 @@ agents the issue-first flow below is required.)
    `gh` is too old to resolve `@copilot` (error: `'@copilot' not found`), request it
    via the API instead — don't skip it:
    ```sh
-   gh api --method POST repos/signalxjs/<REPO>/pulls/<pr>/requested_reviewers \
+   gh api --method POST repos/signalxjs/three/pulls/<pr>/requested_reviewers \
      -f 'reviewers[]=copilot-pull-request-reviewer[bot]'
    ```
    (The reviewer-request API takes the `[bot]`-suffixed slug; the review author
@@ -87,7 +93,7 @@ agents the issue-first flow below is required.)
 
    **Then resolve the threads.** Where the repo's ruleset sets
    `required_review_thread_resolution` (check with
-   `gh api repos/signalxjs/<REPO>/rules/branches/main`), a PR carrying an
+   `gh api repos/signalxjs/three/rules/branches/main`), a PR carrying an
    unresolved **inline** comment cannot merge however green it is — with a
    merge queue it silently never enqueues, and `gh pr checks` shows nothing
    wrong. Pushing the fix does not resolve a thread, and neither does replying
@@ -95,7 +101,7 @@ agents the issue-first flow below is required.)
    resolve it over GraphQL:
    ```sh
    # list the open threads
-   gh api graphql -f query='query { repository(owner:"signalxjs", name:"<REPO>") {
+   gh api graphql -f query='query { repository(owner:"signalxjs", name:"three") {
      pullRequest(number:<pr>) { reviewThreads(first:100) { nodes {
        id isResolved comments(first:1){nodes{body}} } } } } }' \
      -q '.data.repository.pullRequest.reviewThreads.nodes[]
@@ -130,13 +136,10 @@ agents the issue-first flow below is required.)
 
 ## Build, Test, Lint
 
-<!-- TODO(sigx-standard): adapt these to THIS repo's scripts. The defaults below
-     are the monorepo shape from signalxjs/core. -->
-
 ```bash
 pnpm install
-pnpm build       # build all packages
-pnpm test        # vitest run (unit tests across packages)
+pnpm build            # runtime-three → three → three-rapier (each: dev dist + .prod.js dist + tsgo declarations)
+pnpm test             # vitest run (node environment; <Canvas>/input tests opt into happy-dom per file)
 pnpm test <path>                   # single test file/dir (substring match)
 pnpm test -t "name of test"        # single test by name (vitest -t)
                                    # NB: no `--` — vitest discards operands
@@ -144,24 +147,57 @@ pnpm test -t "name of test"        # single test by name (vitest -t)
                                    # runs the WHOLE suite. pnpm forwards
                                    # args natively; the `--` is npm-only.
 pnpm test:watch
-pnpm test:coverage
-pnpm typecheck   # tsgo (a fast TS compiler), config: tsconfig.json
-pnpm lint        # oxlint over the packages' src
+pnpm test:coverage    # coverage → Codecov patch gate in CI
+pnpm bench            # vitest bench: mount/frame/reorder/instancing benches under packages/*/benchmarks
+pnpm typecheck        # tsgo --noEmit over packages (config: tsconfig.json)
+pnpm typecheck:examples  # each example against its OWN tsconfig (fails on a missing tsconfig or an empty program)
+pnpm lint             # oxlint over the packages' src
 pnpm lint:fix
-pnpm size        # size-limit bundle-size check (.size-limit.json)
+pnpm size             # size-limit bundle-size check (.size-limit.json; three/rapier/@sigx peers ignored)
+pnpm verify:pack      # pack every package, install the tarballs in a scratch `sigx` app, typecheck it
+pnpm verify:catalog   # every core dep goes through the single-minor catalog (CI gate)
+pnpm sync:core [X.Y]  # align the catalog's core pins to a core minor; --check is a drift guard
+pnpm version:check    # all publishable packages on one version line (CI gate)
+pnpm dev:cube | dev:hud | dev:physics   # run an example app
 ```
 
-To run an example/app: `pnpm --filter <package-name> dev`.
+Core packages (`@sigx/reactivity`, `@sigx/runtime-core`, `@sigx/runtime-dom`,
+`@sigx/vite`, `sigx`) are pinned to a **single minor** in the `catalog:` block
+of `pnpm-workspace.yaml`. Publishable packages peer on the core singletons at
+the range the catalog derives (`^0.15.0`) with a `devDependencies: "catalog:"`
+twin; examples keep them in `dependencies` as `"catalog:"`. `pnpm verify:catalog`
+enforces the shape in CI. On a core release, `.github/workflows/core-sync.yml`
+runs `sync:core` and opens an alignment PR automatically.
+
+To run a package script: `pnpm --filter <package-name> <script>`.
 
 ## Packages
 
-<!-- TODO(sigx-standard): list THIS repo's packages, or delete this section for a
-     single-package repo. Example shape: -->
+- `packages/runtime-three` → `@sigx/runtime-three` — the three.js renderer:
+  scene-graph host ops on `createRenderer` from `@sigx/runtime-core`, lazy
+  object construction, `attach`/`args`, eager zero-alloc `patchProp`,
+  signal-bound props, `createRoot` + frame loop (`useFrame`, `useFixedUpdate`,
+  demand rendering), raycast pointer events, JSX intrinsic types. Node-import-safe
+  main entry; `./platform` is the opt-in side-effect entry (default mount) for
+  DOM-free apps; `./jsx-runtime` for `jsxImportSource: "@sigx/runtime-three"`.
+- `packages/three` → `@sigx/three` — the companion library for ordinary `sigx`
+  apps (`jsxImportSource: "sigx"`): `<Canvas>` (a runtime-dom component that
+  hosts a three root and bridges provide/inject), `useThree`/`useFrame`
+  re-exports, asset loading (`useLoader`, `useTexture`, `useGLTF`, `useAudio`),
+  input (`useKeyboard`, `useGamepad`, `usePointer`, `usePointerLock`,
+  `useActionMap`), `useInstances`, `useHelper`, `useAnimations`. NOT an umbrella:
+  it does not re-export `@sigx/reactivity` or `@sigx/runtime-core`.
+- `packages/three-rapier` → `@sigx/three-rapier` — Rapier physics: `<Physics>`,
+  `<RigidBody>`, `<Collider>`, auto-colliders, collision/sensor events, debug
+  renderer, fixed-timestep stepping with interpolation.
+- `examples/` — runnable `sigx` apps with `<Canvas>`: `spinning-cube`,
+  `game-hud`, `physics-playground`. Each has its own `tsconfig.json` extending
+  the root with `jsxImportSource: "sigx"`, its own `exclude`, and `../../env.d.ts`
+  in `include` (`pnpm typecheck:examples` fails otherwise).
 
-- `packages/<name>` → `@sigx/<name>` — what it does.
-
-Path aliases: `tsconfig.json` and `vitest.config.ts` map `@sigx/*` to
-`packages/*/src`, so tests and typecheck run against source, not dist.
+Path aliases: `tsconfig.json` and `vitest.config.ts` map `@sigx/runtime-three`
+(+ subpaths), `@sigx/three` and `@sigx/three-rapier` to `packages/*/src`, so
+tests and typecheck run against source, not dist. Longest-prefix aliases first.
 
 ## Parallel work with git worktrees
 
@@ -208,8 +244,8 @@ the queue, in two moments:
   from the PR:
   ```sh
   gh issue create --repo signalxjs/signalxjs.github.io \
-    --title "<REPO>: <what changed>" \
-    --body "Source: signalxjs/<REPO>#<pr>. <What needs documenting, and where on the site.> Not yet released."
+    --title "three: <what changed>" \
+    --body "Source: signalxjs/three#<pr>. <What needs documenting, and where on the site.> Not yet released."
   ```
   A user-facing PR isn't mergeable until its docs issue exists (see step 6 of
   the workflow).
@@ -217,7 +253,7 @@ the queue, in two moments:
   every open docs issue covering a change shipped in that release:
   ```sh
   gh issue comment <n> --repo signalxjs/signalxjs.github.io \
-    --body "Released in <REPO> vX.Y.Z."
+    --body "Released in three vX.Y.Z."
   ```
   (Mention the published package version(s) too if they differ from the tag.)
   A docs issue without a release comment means *merged but not released — don't
@@ -244,7 +280,7 @@ To adopt it in another repo:
 2. Copy `scripts/worktree.mjs` and `CLAUDE.md` verbatim; copy this `AGENTS.md` as a template.
 3. Add `"wt": "node scripts/worktree.mjs"` to the repo's `package.json` scripts.
 4. Adapt the repo-specific sections of `AGENTS.md`: the intro (what the repo is),
-   "Build, Test, Lint", and "Packages". Replace every `<REPO>` with the repo name.
+   "Build, Test, Lint", and "Packages". Replace every `three` with the repo name.
 5. Keep the workflow, worktree, and conventions sections as-is — they are the
    shared standard.
-6. Lock down `main`: `node scripts/apply-branch-protection.mjs signalxjs/<REPO>`.
+6. Lock down `main`: `node scripts/apply-branch-protection.mjs signalxjs/three`.
