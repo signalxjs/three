@@ -15,7 +15,7 @@
 import { existsSync, readdirSync, statSync } from 'node:fs';
 import { join, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { execSync } from 'node:child_process';
+import { spawnSync } from 'node:child_process';
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..');
 const examplesDir = join(repoRoot, 'examples');
@@ -43,21 +43,21 @@ for (const dir of examples) {
         failed++;
         continue;
     }
-    try {
-        // `--listFilesOnly` would be cheaper, but tsgo's flag coverage varies
-        // between previews; a full --noEmit pass is what CI runs anyway.
-        const out = execSync(`pnpm exec tsgo --noEmit -p "${tsconfig}"`, {
-            cwd: repoRoot,
-            encoding: 'utf-8',
-            stdio: ['ignore', 'pipe', 'pipe']
-        });
-        if (/TS18003/.test(out)) throw new Error('empty program (TS18003)');
-        console.log(`✅ ${rel}`);
-    } catch (err) {
-        const text = [err.stdout, err.stderr, err.message].filter(Boolean).join('\n');
-        console.error(`❌ ${rel}\n${text}`);
+    // A full --noEmit pass is what CI runs anyway. Both streams are captured:
+    // tsgo may report diagnostics (incl. the TS18003 empty-program case this
+    // guards against) on either.
+    const result = spawnSync('pnpm', ['exec', 'tsgo', '--noEmit', '-p', tsconfig], {
+        cwd: repoRoot,
+        encoding: 'utf-8',
+        shell: true
+    });
+    const text = `${result.stdout ?? ''}${result.stderr ?? ''}`;
+    if (result.status !== 0 || /TS18003/.test(text)) {
+        console.error(`❌ ${rel}\n${text.trim() || (result.error ? result.error.message : `exit code ${result.status}`)}`);
         failed++;
+        continue;
     }
+    console.log(`✅ ${rel}`);
 }
 
 if (failed) {
