@@ -4,7 +4,6 @@
 import {
     BasicShadowMap,
     PCFShadowMap,
-    PCFSoftShadowMap,
     VSMShadowMap,
     WebGLRenderer,
     type WebGLRendererParameters
@@ -24,7 +23,8 @@ export interface RendererLike {
 export type GlFactory = (canvas: HTMLCanvasElement | null) => RendererLike | Promise<RendererLike>;
 export type GlOption = RendererLike | WebGLRendererParameters | GlFactory;
 
-export type ShadowsOption = boolean | 'basic' | 'pcf' | 'pcfsoft' | 'vsm';
+/** `true` and `'pcf'` are PCF (three r186 removed PCFSoft); `'basic'`, `'vsm'`. */
+export type ShadowsOption = boolean | 'basic' | 'pcf' | 'vsm';
 
 export interface ResolvedGl {
     /** The renderer, or `null` while an async factory is pending. */
@@ -60,13 +60,10 @@ export function applyShadows(gl: RendererLike, shadows: ShadowsOption | undefine
         case 'basic':
             gl.shadowMap.type = BasicShadowMap;
             break;
-        case 'pcf':
-            gl.shadowMap.type = PCFShadowMap;
-            break;
         case 'vsm':
             gl.shadowMap.type = VSMShadowMap;
             break;
         default:
-            gl.shadowMap.type = PCFSoftShadowMap;
+            gl.shadowMap.type = PCFShadowMap;
     }
 }

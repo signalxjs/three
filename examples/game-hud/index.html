@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asteroids HUD — @sigx/three</title>
+    <style>
+      html, body { margin: 0; height: 100%; background: #05070c; color: #e6e6e6; font-family: system-ui, sans-serif; overflow: hidden; }
+      #app { height: 100%; position: relative; }
+      .hud { position: absolute; inset: 0 0 auto 0; display: flex; gap: 1.5rem; align-items: center; padding: 0.75rem 1rem; pointer-events: none; font-variant-numeric: tabular-nums; text-shadow: 0 1px 2px #000; }
+      .hud strong { color: #7dd3fc; }
+      .hud .right { margin-left: auto; opacity: 0.8; }
+      .hud button { pointer-events: auto; font: inherit; padding: 0.3rem 0.7rem; border: 1px solid #3a4152; background: #1c2230cc; color: inherit; border-radius: 6px; cursor: pointer; }
+      .help { position: absolute; left: 1rem; bottom: 1rem; opacity: 0.6; font-size: 0.85rem; pointer-events: none; }
+      .flash { position: absolute; inset: 0; background: #ff3b3b; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+      .flash.hit { opacity: 0.25; transition: none; }
+      .dead { position: absolute; inset: 0; display: grid; place-items: center; background: #000a; font-size: 2rem; }
+      .dead button { pointer-events: auto; font: inherit; margin-top: 1rem; padding: 0.5rem 1rem; }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

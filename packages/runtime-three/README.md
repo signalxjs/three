@@ -99,13 +99,14 @@ entries — or `WebGLRenderer` params), `camera` (instance or
 `scheduler`, `onCreated`.
 
 Inside the tree: `useThree()` (the store: `gl`, `scene`, `camera`, `size`,
-`clock`, `pointer`, `invalidate()`, …), `useFrame(cb, { priority })`,
+`clock`, `pointer`, `invalidate()`, …), `useFrame(cb, { priority, manual })`,
 `useFixedUpdate(cb, { step, maxSubSteps })` → `{ stop, alpha }`, `useSize()`
 (reactive width/height/dpr for render functions).
 
 Demand mode: every prop write, tree change and `invalidate()` requests a
-frame; requests coalesce. A subscriber with `priority > 0` takes over
-rendering (call `state.gl.render` yourself).
+frame; requests coalesce. `priority` only orders callbacks (negative before
+the app's, positive after); `useFrame(cb, { manual: true })` takes over
+rendering (call `state.gl.render` yourself — post-processing, extra passes).
 
 ### Pointer events
 

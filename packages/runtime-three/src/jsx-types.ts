@@ -63,10 +63,18 @@ export interface EventHandlers {
     onWheel?: (event: ThreeEvent<WheelEvent>) => void;
 }
 
+/**
+ * Constructor arguments. `ConstructorParameters` sees only the LAST overload,
+ * which for `Color` is `(r, g, b)` — so the `ColorRepresentation` form is
+ * added back explicitly (`<color attach="background" args={['#05070c']} />`).
+ */
+export type ArgsOf<T extends Ctor> =
+    T extends typeof THREE.Color ? ConstructorParameters<T> | [color: THREE.ColorRepresentation] : ConstructorParameters<T>;
+
 /** Props every three element accepts besides its own properties. */
 export interface NodeProps<T extends Ctor> {
     /** Constructor arguments. Changing them reconstructs the object. */
-    args?: ConstructorParameters<T>;
+    args?: ArgsOf<T>;
     /** How a non-Object3D binds to its parent: `"map"`, `"material-0"`, `"attributes-position"`, or a function. */
     attach?: AttachType;
     /** `null` keeps the object alive past unmount. */

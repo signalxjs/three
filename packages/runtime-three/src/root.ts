@@ -92,7 +92,12 @@ export interface ThreeState {
     setFrameloop(mode: Frameloop): void;
     setCamera(camera: Camera): void;
     setSize(width: number, height: number, dpr?: number): void;
-    subscribe(cb: FrameCallback, priority?: number): () => void;
+    /**
+     * Run `cb` every frame, ordered by ascending `priority`. A `manual`
+     * subscriber takes over rendering: the loop stops calling `gl.render`
+     * while one exists.
+     */
+    subscribe(cb: FrameCallback, priority?: number, manual?: boolean): () => void;
     subscribeFixed(cb: FixedCallback, opts?: { step?: number; maxSubSteps?: number }): FixedHandle;
 }
 
@@ -118,7 +123,7 @@ export interface ThreeRoot {
     invalidate(frames?: number): void;
     advance(dt?: number): void;
     setSize(width: number, height: number, dpr?: number): void;
-    subscribe(cb: FrameCallback, priority?: number): () => void;
+    subscribe(cb: FrameCallback, priority?: number, manual?: boolean): () => void;
     subscribeFixed(cb: FixedCallback, opts?: { step?: number; maxSubSteps?: number }): FixedHandle;
 }
 
@@ -220,7 +225,7 @@ export function createRoot(target: HTMLCanvasElement | HTMLElement | null, optio
             loop.invalidate();
         },
         setSize: (width, height, nextDpr) => setSize(width, height, nextDpr),
-        subscribe: (cb, priority) => loop.subscribe(cb, priority),
+        subscribe: (cb, priority, manual) => loop.subscribe(cb, priority, manual),
         subscribeFixed: (cb, opts) => loop.subscribeFixed(cb, opts?.step ?? state.fixedStep, opts?.maxSubSteps ?? 5)
     };
 

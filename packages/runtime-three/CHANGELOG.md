@@ -27,8 +27,9 @@ follow [Semantic Versioning](https://semver.org/).
   accumulators with `alpha`, `frameloop: 'always' | 'demand' | 'never'`,
   coalescing `invalidate()`, synchronous `advance()`, delta clamping,
   error routing through `handleComponentError`.
-- Hooks: `useThree`, `useFrame`, `useFixedUpdate`, `useSize`, `objectRef`;
-  `ROOT_TOKEN`; `threeMount` (default mount only via `./platform`).
+- Hooks: `useThree`, `useFrame` (`priority` orders, `manual` takes over
+  rendering), `useFixedUpdate`, `useSize`, `objectRef`; `ROOT_TOKEN`;
+  `threeMount` (default mount only via `./platform`).
 - Entries: `.`, `./internals`, `./platform`, `./jsx-runtime`,
   `./jsx-dev-runtime`, `./webgl`, `./webgpu`.
 - Pointer events by raycast: one listener set per root, only objects with
