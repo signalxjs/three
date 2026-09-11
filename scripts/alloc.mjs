@@ -53,7 +53,7 @@ function measure(label, setup) {
 
 let allOk = true;
 
-allOk &= measure('(a) useFrame + objectRef', () => {
+allOk = measure('(a) useFrame + objectRef', () => {
     const r = root();
     const refs = Array.from({ length: N }, () => objectRef());
     r.render(jsx(Fragment, { children: refs.map((ref, i) => jsx('mesh', { key: i, ref, geometry, material })) }));
@@ -64,9 +64,9 @@ allOk &= measure('(a) useFrame + objectRef', () => {
         for (let i = 0; i < objects.length; i++) objects[i].position.x = Math.sin(t + i);
     });
     return () => r.advance(0.016);
-});
+}) && allOk;
 
-allOk &= measure('(b) signal-bound position-x (batched)', () => {
+allOk = measure('(b) signal-bound position-x (batched)', () => {
     const r = root();
     const signals = Array.from({ length: N }, () => signal(0));
     r.render(jsx(Fragment, { children: signals.map((s, i) => jsx('mesh', { key: i, 'position-x': s, geometry, material })) }));
@@ -78,6 +78,6 @@ allOk &= measure('(b) signal-bound position-x (batched)', () => {
         });
         r.advance(0.016);
     };
-});
+}) && allOk;
 
 process.exit(allOk ? 0 : 1);

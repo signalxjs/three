@@ -171,7 +171,7 @@ describe('<Canvas>', () => {
         expect(a.root).toBeNull();
     });
 
-    it('server-safe: the markup renders with no root before mount', () => {
+    it('onCreated fires exactly once, after the root exists on mount', () => {
         const spy = vi.fn();
         const App = component(() => () => <Canvas gl={fakeGL()} frameloop="never" onCreated={spy} />);
         const app = mountApp(<App />);
