@@ -1,5 +1,5 @@
 import { SRGBColorSpace, TextureLoader, type Texture } from 'three';
-import { useLoader, type LoaderResult } from './use-loader.js';
+import { preload, useLoader, type LoaderResult } from './use-loader.js';
 import type { MaybeSignal } from '../shared/types.js';
 
 export interface UseTextureOptions {
@@ -91,9 +91,8 @@ export function useTexture(url: MaybeSignal<string | string[]> | Record<string, 
     };
 }
 
-/** Warm the texture cache. */
+/** Warm the shared texture cache so a later `useTexture` hits synchronously. */
 export function preloadTexture(url: string | string[]): Promise<void> {
-    const urls = Array.isArray(url) ? url : [url];
-    return Promise.all(urls.map((u) => new TextureLoader().loadAsync(u).then(() => {}, () => {}))).then(() => {});
+    return preload(TextureLoader, url);
 }
 
