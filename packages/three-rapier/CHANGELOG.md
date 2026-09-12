@@ -8,5 +8,15 @@ follow [Semantic Versioning](https://semver.org/).
 
 ### Added
 
-- Package scaffold: manifest, build (Vite lib + `tsgo` declarations), test
-  harness wiring. No public API yet.
+- `<Physics>`: lazy Rapier init, world + event queue, children gated on
+  `ready`, stepping on `useFixedUpdate` with a sub-step cap, interpolated
+  pose writes before the app's frame callbacks, `paused`, reactive `gravity`,
+  `debug`, `onReady`.
+- `<RigidBody>`: body types, auto-colliders (cuboid / ball / hull / trimesh)
+  from mesh descendants relative to the group, mass/damping/gravityScale/
+  ccd/sleep/rotation-lock options, initial velocities, collision and sensor
+  events, sleep/wake callbacks, `RigidBodyApi` via `ref`.
+- `<Collider>`: explicit shapes attached to the enclosing body (queued until
+  it exists) or standalone fixed colliders, with events.
+- `<Debug>` line renderer, `useRapier()`, `useBodyHandle()`.
+- `examples/physics-playground`.

@@ -1,0 +1,26 @@
+{
+    "name": "@sigx-examples/three-physics-playground",
+    "version": "0.1.0",
+    "private": true,
+    "description": "@sigx/three-rapier: rigid bodies, auto-colliders, a sensor zone, impulses on click, the debug renderer",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "typecheck": "tsgo --noEmit -p ."
+    },
+    "dependencies": {
+        "@dimforge/rapier3d-compat": "^0.20.0",
+        "@sigx/three": "workspace:^",
+        "@sigx/three-rapier": "workspace:^",
+        "sigx": "catalog:",
+        "three": "^0.186.0"
+    },
+    "devDependencies": {
+        "@sigx/vite": "catalog:",
+        "@types/three": "^0.185.4",
+        "typescript": "^6.0.3",
+        "vite": "^8.0.11"
+    }
+}

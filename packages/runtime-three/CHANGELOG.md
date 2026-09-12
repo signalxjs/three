@@ -20,7 +20,8 @@ follow [Semantic Versioning](https://semver.org/).
   default restore on removal.
 - Signal-bound props: a signal/computed/getter/reactive-object prop value
   binds one effect that writes to the object without re-rendering.
-- `createRoot()` with a `ThreeState` store, `gl` resolution (instance /
+- `createRoot()` with a `ThreeState` store, camera options (`fov`, `near`,
+  `far`, `position`, `lookAt`, `manual`), `gl` resolution (instance /
   factory / params; `webgl()` and `webgpu()` factories), shadows, dpr, resize
   handling, camera projection updates.
 - Frame loop: priority-sorted copy-on-write subscribers, fixed-step
