@@ -149,6 +149,7 @@ pnpm test -t "name of test"        # single test by name (vitest -t)
 pnpm test:watch
 pnpm test:coverage    # coverage → Codecov patch gate in CI
 pnpm bench            # vitest bench: mount/frame/reorder/instancing benches under packages/*/benchmarks
+pnpm bench:alloc      # per-frame heap growth of the hot paths (node --expose-gc; needs `pnpm build` first)
 pnpm typecheck        # tsgo --noEmit over packages (config: tsconfig.json)
 pnpm typecheck:examples  # each example against its OWN tsconfig (fails on a missing tsconfig or an empty program)
 pnpm lint             # oxlint over the packages' src

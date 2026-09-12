@@ -50,7 +50,7 @@ parallel checkouts.
 | Typecheck | `pnpm typecheck` |
 | Lint | `pnpm lint` |
 | Typecheck the examples | `pnpm typecheck:examples` |
-| Benchmarks | `pnpm bench` |
+| Benchmarks | `pnpm bench`; `pnpm bench:alloc` after a build for per-frame heap growth |
 | Bundle size | `pnpm size` (after `pnpm build`) |
 | Run an example | `pnpm dev:cube`, `pnpm dev:hud`, `pnpm dev:physics` |
 

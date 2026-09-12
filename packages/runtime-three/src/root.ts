@@ -6,7 +6,7 @@ import { batch, signal } from '@sigx/reactivity';
 import { component, defineProvide, jsx, type AppContext, type JSXElement } from '@sigx/runtime-core';
 import { handleComponentError, setCurrentInstance, type ComponentSetupContext } from '@sigx/runtime-core/internals';
 import { PerspectiveCamera, Raycaster, Scene, Vector2, type Camera } from 'three';
-import { createInteractiveRegistry, type InteractiveRegistry } from './events.js';
+import { createEventManager, createInteractiveRegistry, type EventManager, type EventsOptions, type InteractiveRegistry } from './events.js';
 import { applyShadows, resolveGl, type GlOption, type RendererLike, type ShadowsOption } from './gl.js';
 import { useThree } from './hooks.js';
 import { defaultScheduler, FrameLoop, type FixedCallback, type FixedHandle, type FrameCallback, type FrameScheduler } from './loop.js';
@@ -39,8 +39,8 @@ export interface RootOptions {
     dpr?: number | [number, number];
     /** `always` (default) renders every frame; `demand` renders on `invalidate()`; `never` only on `advance()`. */
     frameloop?: Frameloop;
-    /** Raycast pointer events on the canvas. Default: on when there is a canvas. */
-    events?: boolean;
+    /** Raycast pointer events on the canvas. Default: on when there is a canvas. Pass options to customise. */
+    events?: boolean | EventsOptions;
     /** Default step for `useFixedUpdate`, in seconds. Default 1/60. */
     fixedStep?: number;
     /** A fixed size: no ResizeObserver. Tests and headless roots use this. */
@@ -105,6 +105,8 @@ export interface ThreeRoot {
     readonly ready: Promise<void>;
     /** @internal objects with pointer handlers */
     readonly interactive: InteractiveRegistry;
+    /** The pointer-event manager (`handle(type, event)` feeds a synthetic event), or `null` when events are off. */
+    readonly events: EventManager | null;
     /**
      * Render (or re-render) an element into the scene. `parentInstance` links
      * the tree's DI parent chain to a component of another renderer (how
@@ -318,6 +320,7 @@ export function createRoot(target: HTMLCanvasElement | HTMLElement | null, optio
         container,
         ready,
         interactive: createInteractiveRegistry(),
+        events: null,
         render(element, appContext, parentInstance) {
             if (unmounted) return;
             appContextForErrors = appContext ?? appContextForErrors;
@@ -337,6 +340,7 @@ export function createRoot(target: HTMLCanvasElement | HTMLElement | null, optio
             unmounted = true;
             renderVNode(null as unknown as JSXElement, container);
             loop.stop();
+            root.events?.dispose();
             stopResize?.();
             stopResize = null;
             if (resolved.owned) state.gl?.dispose?.();
@@ -349,6 +353,13 @@ export function createRoot(target: HTMLCanvasElement | HTMLElement | null, optio
         subscribeFixed: state.subscribeFixed
     };
     container.root = root;
+
+    // On by default when there is a canvas; an options object opts in even
+    // without one (tests feed `events.handle()` directly).
+    const eventsOption = options.events;
+    if (eventsOption !== false && (canvas !== null || typeof eventsOption === 'object')) {
+        (root as { events: EventManager | null }).events = createEventManager(root, typeof eventsOption === 'object' ? eventsOption : {});
+    }
 
     options.onCreated?.(state);
     loop.start();

@@ -157,6 +157,23 @@ export function findRoot(node: ThreeNode): ThreeRoot | null {
     return null;
 }
 
+/**
+ * A subtree learns its root when its top node is inserted (children mount
+ * bottom-up, before their parent is placed). Walk it once: cache `root` on
+ * every node and let `onAdopt` register the ones that need the root (pointer
+ * handlers). Skipped for moves within the same root.
+ */
+export function adoptRoot(node: ThreeNode, root: ThreeRoot, onAdopt: (node: ThreeNode) => void): void {
+    if (node.root === root) return;
+    node.root = root;
+    onAdopt(node);
+    let child = node.firstChild;
+    while (child !== null) {
+        adoptRoot(child, root, onAdopt);
+        child = child.next;
+    }
+}
+
 /** The host node a three.js object was created by, if any. */
 export function nodeOf(object: unknown): ThreeNode | null {
     return (object as { __sigx?: ThreeNode } | null)?.__sigx ?? null;

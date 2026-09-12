@@ -17,5 +17,8 @@ export type { ThreeConstructor, AttachType, AttachFn, EventInvoker } from './nod
 export type { RendererLike, GlOption, GlFactory, ShadowsOption } from './gl.js';
 export { threeMount } from './mount.js';
 export type { ThreeMountTarget } from './mount.js';
-export type { EventName } from './events.js';
+export type { EventName, ThreeEvent, EventsOptions, EventManager, NativePointerLike } from './events.js';
+export type { ThreeElement, ThreeElements, MathValue, Bindable, Mutable, EventHandlers, NodeProps, PrimitiveProps, DashedPaths, Tag } from './jsx-types.js';
+// The global JSX.IntrinsicElements merge rides this side-effect import into dist/index.d.ts.
+import './jsx-types.js';
 export { render, mount, patch, unmount, mountComponent } from './render.js';

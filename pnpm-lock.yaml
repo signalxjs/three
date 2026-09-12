@@ -23,6 +23,9 @@ importers:
 
   .:
     devDependencies:
+      '@sigx/runtime-dom':
+        specifier: 'catalog:'
+        version: 0.15.6
       '@size-limit/preset-small-lib':
         specifier: ^11
         version: 11.2.0(size-limit@11.2.0)
