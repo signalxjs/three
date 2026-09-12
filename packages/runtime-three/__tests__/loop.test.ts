@@ -51,7 +51,7 @@ describe('frame loop', () => {
         t.unmount();
     });
 
-    it('runs subscribers in priority order with the delta, and priority > 0 takes over rendering', () => {
+    it('runs subscribers in priority order with the delta, and a manual subscriber takes over rendering', () => {
         const t = createTestRoot();
         const log: string[] = [];
         const offA = t.state.subscribe(() => log.push('a'), 0);
@@ -60,7 +60,7 @@ describe('frame loop', () => {
         t.state.advance(0.5);
         expect(log).toEqual(['early', 'a', 'b']);
         expect(t.gl.calls).toHaveLength(1);
-        const offRender = t.state.subscribe((s) => { log.push('render'); s.gl!.render(s.scene, s.camera); }, 1);
+        const offRender = t.state.subscribe((s) => { log.push('render'); s.gl!.render(s.scene, s.camera); }, 1, true);
         t.state.advance(0.5);
         expect(log.slice(3)).toEqual(['early', 'a', 'b', 'render']);
         expect(t.gl.calls).toHaveLength(2); // the subscriber rendered, the loop did not

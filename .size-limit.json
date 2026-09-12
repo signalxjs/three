@@ -3,18 +3,120 @@
     "name": "@sigx/runtime-three",
     "path": "packages/runtime-three/dist/index.js",
     "limit": "12 KB",
-    "ignore": ["three", "@sigx/reactivity", "@sigx/runtime-core"]
+    "ignore": [
+      "three",
+      "@sigx/reactivity",
+      "@sigx/runtime-core"
+    ]
   },
   {
     "name": "@sigx/three",
     "path": "packages/three/dist/index.js",
-    "limit": "14 KB",
-    "ignore": ["three", "@sigx/reactivity", "@sigx/runtime-core", "@sigx/runtime-dom", "@sigx/runtime-three"]
+    "limit": "8 KB",
+    "ignore": [
+      "three",
+      "three/*",
+      "@sigx/reactivity",
+      "@sigx/runtime-core",
+      "@sigx/runtime-dom",
+      "@sigx/runtime-three"
+    ]
+  },
+  {
+    "name": "@sigx/three { useInstances }",
+    "path": "packages/three/dist/index.js",
+    "import": "{ useInstances }",
+    "limit": "3 KB",
+    "ignore": [
+      "three",
+      "three/*",
+      "@sigx/reactivity",
+      "@sigx/runtime-core",
+      "@sigx/runtime-dom",
+      "@sigx/runtime-three"
+    ]
+  },
+  {
+    "name": "@sigx/three { useActionMap }",
+    "path": "packages/three/dist/index.js",
+    "import": "{ useActionMap }",
+    "limit": "4 KB",
+    "ignore": [
+      "three",
+      "three/*",
+      "@sigx/reactivity",
+      "@sigx/runtime-core",
+      "@sigx/runtime-dom",
+      "@sigx/runtime-three"
+    ]
+  },
+  {
+    "name": "@sigx/three { useKeyboard }",
+    "path": "packages/three/dist/index.js",
+    "import": "{ useKeyboard }",
+    "limit": "3 KB",
+    "ignore": [
+      "three",
+      "three/*",
+      "@sigx/reactivity",
+      "@sigx/runtime-core",
+      "@sigx/runtime-dom",
+      "@sigx/runtime-three"
+    ]
+  },
+  {
+    "name": "@sigx/three { useLoader }",
+    "path": "packages/three/dist/index.js",
+    "import": "{ useLoader }",
+    "limit": "3 KB",
+    "ignore": [
+      "three",
+      "three/*",
+      "@sigx/reactivity",
+      "@sigx/runtime-core",
+      "@sigx/runtime-dom",
+      "@sigx/runtime-three"
+    ]
+  },
+  {
+    "name": "@sigx/three { useFrame }",
+    "path": "packages/three/dist/index.js",
+    "import": "{ useFrame }",
+    "limit": "2.5 KB",
+    "ignore": [
+      "three",
+      "three/*",
+      "@sigx/reactivity",
+      "@sigx/runtime-core",
+      "@sigx/runtime-dom",
+      "@sigx/runtime-three"
+    ]
+  },
+  {
+    "name": "@sigx/three { Canvas }",
+    "path": "packages/three/dist/index.js",
+    "import": "{ Canvas }",
+    "limit": "3 KB",
+    "ignore": [
+      "three",
+      "three/*",
+      "@sigx/reactivity",
+      "@sigx/runtime-core",
+      "@sigx/runtime-dom",
+      "@sigx/runtime-three"
+    ]
   },
   {
     "name": "@sigx/three-rapier",
     "path": "packages/three-rapier/dist/index.js",
     "limit": "10 KB",
-    "ignore": ["three", "@dimforge/rapier3d-compat", "@sigx/reactivity", "@sigx/runtime-core", "@sigx/runtime-three", "@sigx/three"]
+    "ignore": [
+      "three",
+      "@dimforge/rapier3d-compat",
+      "@sigx/reactivity",
+      "@sigx/runtime-core",
+      "@sigx/runtime-three",
+      "@sigx/three"
+    ]
   }
 ]

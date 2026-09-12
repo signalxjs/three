@@ -33,6 +33,7 @@ export function defaultScheduler(): FrameScheduler {
 interface FrameSub {
     cb: FrameCallback;
     priority: number;
+    manual: boolean;
 }
 
 interface FixedSub {
@@ -56,7 +57,7 @@ export class FrameLoop {
     /** Sorted by priority (ascending). Copy-on-write: iteration never sees a mutating array. */
     private subs: FrameSub[] = [];
     private fixed: FixedSub[] = [];
-    /** Number of subscribers with priority > 0: any of them takes over rendering (r3f semantics). */
+    /** Number of `manual` subscribers: while any exists the loop does not call `gl.render` itself. */
     manualRender = 0;
     private pendingFrames = 0;
     private frameId: unknown = null;
@@ -70,8 +71,8 @@ export class FrameLoop {
         private readonly onError: (error: unknown, info: string) => void
     ) {}
 
-    subscribe(cb: FrameCallback, priority = 0): () => void {
-        const sub: FrameSub = { cb, priority };
+    subscribe(cb: FrameCallback, priority = 0, manual = false): () => void {
+        const sub: FrameSub = { cb, priority, manual };
         const prev = this.subs;
         let i = prev.length;
         while (i > 0 && prev[i - 1].priority > priority) i--;
@@ -79,7 +80,7 @@ export class FrameLoop {
         next.push(sub);
         for (let j = i; j < prev.length; j++) next.push(prev[j]);
         this.subs = next;
-        if (priority > 0) this.manualRender++;
+        if (manual) this.manualRender++;
         this.invalidate();
         let active = true;
         return () => {
@@ -92,7 +93,7 @@ export class FrameLoop {
                 copy.splice(k, 1);
                 this.subs = copy;
             }
-            if (priority > 0) this.manualRender--;
+            if (manual) this.manualRender--;
         };
     }
 

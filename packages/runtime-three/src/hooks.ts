@@ -25,13 +25,22 @@ function disposeWith(fn: () => void): void {
     else onScopeDispose(fn);
 }
 
+export interface UseFrameOptions {
+    /** Ordering: ascending, default 0. Negative runs before the app's callbacks, positive after. */
+    priority?: number;
+    /**
+     * Take over rendering: while a `manual` subscriber exists the loop does not
+     * call `gl.render` — you do (post-processing, multiple passes, render-to-texture).
+     */
+    manual?: boolean;
+}
+
 /**
- * Run `cb` every frame. Subscribers run in ascending `priority`; a priority
- * above 0 takes over rendering (call `state.gl.render` yourself).
- * Returns the unsubscribe; also unsubscribed on unmount.
+ * Run `cb` every frame. Subscribers run in ascending `priority`; `manual`
+ * hands rendering to you. Returns the unsubscribe; also unsubscribed on unmount.
  */
-export function useFrame(cb: FrameCallback, opts?: { priority?: number }): () => void {
-    const off = useThree().subscribe(cb, opts?.priority ?? 0);
+export function useFrame(cb: FrameCallback, opts?: UseFrameOptions): () => void {
+    const off = useThree().subscribe(cb, opts?.priority ?? 0, opts?.manual === true);
     disposeWith(off);
     return off;
 }

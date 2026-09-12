@@ -9,7 +9,7 @@
 export { createRoot } from './root.js';
 export type { ThreeRoot, ThreeState, RootOptions, CameraOptions, Frameloop, ThreeSize, ThreeClock } from './root.js';
 export { useThree, useFrame, useFixedUpdate, useSize, objectRef, ROOT_TOKEN } from './hooks.js';
-export type { ObjectRef } from './hooks.js';
+export type { ObjectRef, UseFrameOptions } from './hooks.js';
 export type { FrameCallback, FixedCallback, FixedHandle, FrameScheduler } from './loop.js';
 export { extend, tagNameFor } from './catalog.js';
 export { ThreeNode } from './node.js';

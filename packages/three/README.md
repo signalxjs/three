@@ -87,3 +87,52 @@ Inside: `useThree()`, `useFrame()`, `useFixedUpdate()`, `useSize()`,
 
 Server rendering: the wrapper and canvas render as markup; three never runs
 on the server. Hydration mounts the root.
+
+## Composables
+
+All tree-shakable, one per file. They stop with the owning component (or
+reactive scope) and also return an explicit `stop`. On the server every one
+is an inert no-op. Inputs accept a value, a signal or a getter (`toValue`).
+
+### Assets
+
+| | |
+| --- | --- |
+| `useLoader(Loader, url \| url[], { extensions, onProgress })` | Any three loader. Returns `{ value, loading, error, state, reload }` (getters — read them in render functions). Cached by url and **shared by identity** across roots and components; a cache hit resolves synchronously; a reactive `url` clears and reloads. |
+| `preload(Loader, urls, extensions?)` | Warm the cache ahead of time. |
+| `clearLoaderCache(Loader?, url?)` | Drop and dispose cached assets. |
+| `useTexture(url \| url[] \| { map, normalMap, … }, { colorSpace, anisotropy })` | `TextureLoader`; sRGB by default. |
+| `useGLTF(url, { draco })` + `useGLTF.preload` | `GLTFLoader`, optional DRACO. Mount with `<primitive object={gltf.value.scene} />`. |
+| `useAudio(url, { positional, loop, volume })` | `AudioLoader` → an `Audio`/`PositionalAudio` on the camera's listener; `play()` before the buffer lands is queued. |
+
+Why not `useData`: GPU assets are non-serializable, never load on the server,
+must be shared by identity, and need `dispose()`. The vocabulary is the same.
+
+### Input
+
+Polled state for game loops — read it inside `useFrame`. Edges
+(`justPressed` / `justReleased`) are frame-accurate and cleared at the end of
+each frame. Nothing allocates per event or frame.
+
+| | |
+| --- | --- |
+| `useKeyboard({ target, preventDefault })` | `isDown(code)`, `justPressed`, `justReleased`, `pressed`. Auto-repeat ignored; blur releases all. |
+| `useGamepad(index, { deadzone, threshold })` | Standard mapping into `buttons: Float32Array(17)` / `axes: Float32Array(4)`, `isDown`, `justPressed`, `axis`, reactive `connected`. `GamepadButton` / `GamepadAxis` name the indices. |
+| `usePointer({ target })` | NDC `x`/`y`, per-frame `dx`/`dy`, `buttons`, `isDown`/`justPressed`/`justReleased`, `over`. For per-object hits use the `onPointer*` props. |
+| `usePointerLock({ target })` | `lock()` from a gesture, reactive `isLocked`, per-frame `movement.x/y`. |
+| `useActionMap({ jump: ['Space', 'GamepadA'] }, { axes: { turn: { neg: ['KeyA'], pos: ['KeyD'], stick: GamepadAxis.LeftX } } })` | Named actions and axes over keyboard + gamepad; bindings pre-resolved. |
+
+Works in a DOM component above `<Canvas>` too (then it polls on
+`requestAnimationFrame` instead of the root's loop).
+
+### Instancing, helpers, animation
+
+| | |
+| --- | --- |
+| `useInstances(count, { color })` | Typed-array `position` / `quaternion` / `scale` (/ `color`); `commit()` composes every instance matrix with one scratch `Matrix4`. `<instancedMesh ref={inst.ref} args={[geometry, material, inst.count]} />`. |
+| `useHelper(objectRef \| signal, Helper, ...args)` | Adds a helper to the scene, updates it per frame, removes it when the target changes or the scope ends. |
+| `useAnimations(clips, root)` | `AnimationMixer` on the frame loop: `play(name, { fade, loop, timeScale })`, `stop()`, `actions`, `names`. |
+
+`examples/game-hud` (`pnpm dev:hud`) puts it together: an HTML HUD sharing
+signals with the scene, `useActionMap` steering, 500 asteroids in one draw
+call, pointer lock.
