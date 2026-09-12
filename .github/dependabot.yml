@@ -6,6 +6,11 @@ updates:
       interval: weekly
     open-pull-requests-limit: 10
     groups:
+      # three and its types move together; a lone @types/three bump breaks typecheck.
+      three:
+        patterns:
+          - three
+          - "@types/three"
       dev-dependencies:
         dependency-type: development
         update-types:

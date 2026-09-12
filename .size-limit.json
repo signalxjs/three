@@ -1,27 +1,20 @@
 [
   {
-    "name": "sigx",
-    "path": "packages/sigx/dist/sigx.js",
-    "limit": "20 KB"
+    "name": "@sigx/runtime-three",
+    "path": "packages/runtime-three/dist/index.js",
+    "limit": "12 KB",
+    "ignore": ["three", "@sigx/reactivity", "@sigx/runtime-core"]
   },
   {
-    "name": "@sigx/reactivity",
-    "path": "packages/reactivity/dist/index.js",
-    "limit": "5 KB"
+    "name": "@sigx/three",
+    "path": "packages/three/dist/index.js",
+    "limit": "14 KB",
+    "ignore": ["three", "@sigx/reactivity", "@sigx/runtime-core", "@sigx/runtime-dom", "@sigx/runtime-three"]
   },
   {
-    "name": "@sigx/runtime-core",
-    "path": "packages/runtime-core/dist/index.js",
-    "limit": "12 KB"
-  },
-  {
-    "name": "@sigx/runtime-dom",
-    "path": "packages/runtime-dom/dist/index.js",
-    "limit": "10 KB"
-  },
-  {
-    "name": "@sigx/server-renderer",
-    "path": "packages/server-renderer/dist/index.js",
-    "limit": "18 KB"
+    "name": "@sigx/three-rapier",
+    "path": "packages/three-rapier/dist/index.js",
+    "limit": "10 KB",
+    "ignore": ["three", "@dimforge/rapier3d-compat", "@sigx/reactivity", "@sigx/runtime-core", "@sigx/runtime-three", "@sigx/three"]
   }
 ]

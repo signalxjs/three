@@ -1,8 +1,3 @@
-# TODO(sigx-standard): this workflow publishes to npm via trusted publishing
-# (OIDC). It expects `scripts/publish.js` (publishes the repo's package(s) in
-# dependency order) and `scripts/verify-pack.js`. Copy both from signalxjs/core
-# as a starting point, or replace the "Publish to npm" / "Verify pack" steps
-# with your own. Configure trusted publishing per-package on npmjs.com first.
 name: Release
 
 on:

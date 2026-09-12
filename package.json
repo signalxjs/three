@@ -1,24 +1,80 @@
 {
-  "name": "@sigx/repo-template",
-  "version": "0.1.0",
-  "private": true,
-  "description": "The canonical sigx repo setup: agent workflow, git-worktree flow, CI/release pipeline, branch protection, and governance — as a GitHub template.",
-  "type": "module",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/signalxjs/repo-template.git"
-  },
-  "author": "Andreas Ekdahl <andy@ekdahls.net>",
-  "license": "MIT",
-  "packageManager": "pnpm@10.33.4",
-  "engines": {
-    "node": "^20.19.0 || >=22.12.0"
-  },
-  "scripts": {
-    "wt": "node scripts/worktree.mjs",
-    "branch-protection": "node scripts/apply-branch-protection.mjs",
-    "sync:core": "node scripts/sync-core.mjs",
-    "verify:catalog": "node scripts/check-catalog.mjs",
-    "test": "node --test"
-  }
+    "name": "sigx-three",
+    "version": "0.1.0",
+    "private": true,
+    "packageManager": "pnpm@10.33.4",
+    "description": "SignalX three.js — a performant three.js renderer, <Canvas> bridge, composables and Rapier physics for building games with sigx",
+    "type": "module",
+    "engines": {
+        "node": "^20.19.0 || >=22.12.0"
+    },
+    "workspaces": [
+        "packages/*",
+        "examples/*"
+    ],
+    "scripts": {
+        "wt": "node scripts/worktree.mjs",
+        "branch-protection": "node scripts/apply-branch-protection.mjs",
+        "sync:core": "node scripts/sync-core.mjs",
+        "verify:catalog": "node scripts/check-catalog.mjs",
+        "build": "pnpm --filter @sigx/runtime-three run build && pnpm --filter @sigx/three run build && pnpm --filter @sigx/three-rapier run build",
+        "test": "vitest run --passWithNoTests",
+        "test:watch": "vitest",
+        "test:coverage": "vitest run --passWithNoTests --coverage",
+        "bench": "vitest bench --run",
+        "typecheck": "tsgo --noEmit",
+        "typecheck:examples": "node scripts/typecheck-examples.mjs",
+        "lint": "oxlint packages/runtime-three/src packages/three/src packages/three-rapier/src",
+        "lint:fix": "oxlint --fix packages/runtime-three/src packages/three/src packages/three-rapier/src",
+        "size": "size-limit",
+        "publish:dry": "node scripts/publish.js --dry-run",
+        "publish:all": "node scripts/publish.js",
+        "publish:beta": "node scripts/publish.js --tag beta",
+        "verify:pack": "node scripts/verify-pack.js",
+        "version:set": "node scripts/bump-version.js",
+        "version:patch": "node scripts/bump-version.js patch",
+        "version:minor": "node scripts/bump-version.js minor",
+        "version:major": "node scripts/bump-version.js major",
+        "version:check": "node scripts/check-versions.js",
+        "dev:cube": "pnpm --filter @sigx-examples/three-spinning-cube dev",
+        "dev:hud": "pnpm --filter @sigx-examples/three-game-hud dev",
+        "dev:physics": "pnpm --filter @sigx-examples/three-physics-playground dev",
+        "clean": "node scripts/clean.mjs"
+    },
+    "devDependencies": {
+        "@size-limit/preset-small-lib": "^11",
+        "@types/node": "^22.0.0",
+        "@types/three": "^0.185.4",
+        "@typescript/native-preview": "7.0.0-dev.20260517.1",
+        "@vitest/coverage-v8": "^4.1.5",
+        "happy-dom": "^20.9.0",
+        "oxlint": "^1.63.0",
+        "size-limit": "^11",
+        "three": "^0.186.0",
+        "typescript": "^6.0.3",
+        "vite": "^8.0.11",
+        "vitest": "^4.1.5"
+    },
+    "keywords": [
+        "SignalX",
+        "sigx",
+        "three",
+        "threejs",
+        "webgl",
+        "webgpu",
+        "3d",
+        "game",
+        "renderer",
+        "tsx"
+    ],
+    "author": "Andreas Ekdahl",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/signalxjs/three.git"
+    },
+    "homepage": "https://sigx.dev/three/",
+    "bugs": {
+        "url": "https://github.com/signalxjs/three/issues"
+    }
 }

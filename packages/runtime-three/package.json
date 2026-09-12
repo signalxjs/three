@@ -1,0 +1,67 @@
+{
+    "name": "@sigx/runtime-three",
+    "version": "0.1.0",
+    "description": "three.js renderer for SignalX — scene-graph host ops, frame loop, raycast pointer events and JSX intrinsics",
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "development": "./dist/index.js",
+            "production": "./dist/index.prod.js",
+            "import": "./dist/index.js"
+        }
+    },
+    "files": [
+        "dist"
+    ],
+    "sideEffects": false,
+    "scripts": {
+        "build": "vite build && vite build --mode prod-dist && tsgo --emitDeclarationOnly",
+        "dev": "vite build --watch"
+    },
+    "keywords": [
+        "sigx",
+        "signalx",
+        "three",
+        "threejs",
+        "renderer",
+        "webgl",
+        "webgpu",
+        "3d",
+        "tsx"
+    ],
+    "author": "Andreas Ekdahl",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/signalxjs/three.git",
+        "directory": "packages/runtime-three"
+    },
+    "homepage": "https://sigx.dev/three/",
+    "bugs": {
+        "url": "https://github.com/signalxjs/three/issues"
+    },
+    "engines": {
+        "node": "^20.19.0 || >=22.12.0"
+    },
+    "peerDependencies": {
+        "@sigx/reactivity": "^0.15.0",
+        "@sigx/runtime-core": "^0.15.0",
+        "three": ">=0.160.0"
+    },
+    "devDependencies": {
+        "@sigx/reactivity": "catalog:",
+        "@sigx/runtime-core": "catalog:",
+        "@sigx/vite": "catalog:",
+        "@types/node": "^22.0.0",
+        "@types/three": "^0.185.4",
+        "three": "^0.186.0",
+        "typescript": "^6.0.3",
+        "vite": "^8.0.11"
+    },
+    "publishConfig": {
+        "access": "public"
+    }
+}
