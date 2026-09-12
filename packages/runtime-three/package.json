@@ -1,7 +1,7 @@
 {
     "name": "@sigx/runtime-three",
     "version": "0.1.0",
-    "description": "three.js renderer for SignalX — scene-graph host ops, frame loop, raycast pointer events and JSX intrinsics",
+    "description": "three.js renderer for SignalX \u2014 scene-graph host ops, frame loop, raycast pointer events and JSX intrinsics",
     "type": "module",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
@@ -11,12 +11,55 @@
             "development": "./dist/index.js",
             "production": "./dist/index.prod.js",
             "import": "./dist/index.js"
+        },
+        "./internals": {
+            "types": "./dist/internals.d.ts",
+            "development": "./dist/internals.js",
+            "production": "./dist/internals.prod.js",
+            "import": "./dist/internals.js"
+        },
+        "./platform": {
+            "types": "./dist/platform.d.ts",
+            "development": "./dist/platform.js",
+            "production": "./dist/platform.prod.js",
+            "import": "./dist/platform.js"
+        },
+        "./jsx-runtime": {
+            "types": "./dist/jsx-runtime.d.ts",
+            "development": "./dist/jsx-runtime.js",
+            "production": "./dist/jsx-runtime.prod.js",
+            "import": "./dist/jsx-runtime.js"
+        },
+        "./jsx-dev-runtime": {
+            "types": "./dist/jsx-runtime.d.ts",
+            "development": "./dist/jsx-runtime.js",
+            "production": "./dist/jsx-runtime.prod.js",
+            "import": "./dist/jsx-runtime.js"
+        },
+        "./webgl": {
+            "types": "./dist/webgl.d.ts",
+            "development": "./dist/webgl.js",
+            "production": "./dist/webgl.prod.js",
+            "import": "./dist/webgl.js"
+        },
+        "./webgpu": {
+            "types": "./dist/webgpu.d.ts",
+            "development": "./dist/webgpu.js",
+            "production": "./dist/webgpu.prod.js",
+            "import": "./dist/webgpu.js"
         }
     },
     "files": [
         "dist"
     ],
-    "sideEffects": false,
+    "sideEffects": [
+        "./dist/platform.js",
+        "./dist/platform.prod.js",
+        "./dist/platform-*.js",
+        "./dist/platform-*.prod.js",
+        "./dist/jsx-runtime.js",
+        "./dist/jsx-runtime.prod.js"
+    ],
     "scripts": {
         "build": "vite build && vite build --mode prod-dist && tsgo --emitDeclarationOnly",
         "dev": "vite build --watch"
