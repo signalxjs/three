@@ -11,13 +11,13 @@
     "forceConsistentCasingInFileNames": true,
     "types": ["node"],
     "paths": {
-      "@sigx/runtime-three/internals": ["./packages/runtime-three/src/internals.ts"],
-      "@sigx/runtime-three/platform": ["./packages/runtime-three/src/platform.ts"],
-      "@sigx/runtime-three/jsx-runtime": ["./packages/runtime-three/src/jsx-runtime.ts"],
-      "@sigx/runtime-three/jsx-dev-runtime": ["./packages/runtime-three/src/jsx-runtime.ts"],
-      "@sigx/runtime-three/webgl": ["./packages/runtime-three/src/webgl.ts"],
-      "@sigx/runtime-three/webgpu": ["./packages/runtime-three/src/webgpu.ts"],
-      "@sigx/runtime-three": ["./packages/runtime-three/src/index.ts"],
+      "@sigx/three-runtime/internals": ["./packages/three-runtime/src/internals.ts"],
+      "@sigx/three-runtime/platform": ["./packages/three-runtime/src/platform.ts"],
+      "@sigx/three-runtime/jsx-runtime": ["./packages/three-runtime/src/jsx-runtime.ts"],
+      "@sigx/three-runtime/jsx-dev-runtime": ["./packages/three-runtime/src/jsx-runtime.ts"],
+      "@sigx/three-runtime/webgl": ["./packages/three-runtime/src/webgl.ts"],
+      "@sigx/three-runtime/webgpu": ["./packages/three-runtime/src/webgpu.ts"],
+      "@sigx/three-runtime": ["./packages/three-runtime/src/index.ts"],
       "@sigx/three": ["./packages/three/src/index.ts"],
       "@sigx/three-rapier": ["./packages/three-rapier/src/index.ts"]
     }

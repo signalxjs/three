@@ -29,7 +29,7 @@ import {
     type ShadowsOption,
     type ThreeRoot,
     type ThreeState
-} from '@sigx/runtime-three';
+} from '@sigx/three-runtime';
 import type { Camera, Scene } from 'three';
 
 /** What `<Canvas ref={api}>` exposes. */

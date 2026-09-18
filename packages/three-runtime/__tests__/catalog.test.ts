@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import * as THREE from 'three';
-import { extend, tagNameFor } from '@sigx/runtime-three';
-import { clearCatalog, DOM_COLLISIONS, isRegistered, resolveConstructor } from '@sigx/runtime-three/internals';
+import { extend, tagNameFor } from '@sigx/three-runtime';
+import { clearCatalog, DOM_COLLISIONS, isRegistered, resolveConstructor } from '@sigx/three-runtime/internals';
 
 describe('catalog', () => {
     it('lowerFirsts class names into tags', () => {

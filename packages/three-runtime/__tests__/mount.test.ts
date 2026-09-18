@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import * as THREE from 'three';
 import { jsx, Fragment, component, signal } from '@sigx/runtime-core';
-import { objectRef } from '@sigx/runtime-three';
+import { objectRef } from '@sigx/three-runtime';
 import { createTestRoot } from './harness.js';
 
 describe('mount', () => {

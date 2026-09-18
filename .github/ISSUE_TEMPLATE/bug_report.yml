@@ -24,7 +24,7 @@ body:
       multiple: true
       options:
         - "@sigx/three"
-        - "@sigx/runtime-three"
+        - "@sigx/three-runtime"
         - "@sigx/three-rapier"
         - Not sure / multiple
     validations:

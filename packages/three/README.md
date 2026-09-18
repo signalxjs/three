@@ -73,7 +73,7 @@ services freely.
 | Prop | |
 | --- | --- |
 | `camera` | A camera instance or `{ fov, near, far, position, lookAt, manual }` (default perspective at z = 5 looking down −Z) |
-| `gl` | A renderer instance, `WebGLRenderer` params, or a factory (`webgl()` / `webgpu()` from `@sigx/runtime-three/webgl` & `/webgpu`) |
+| `gl` | A renderer instance, `WebGLRenderer` params, or a factory (`webgl()` / `webgpu()` from `@sigx/three-runtime/webgl` & `/webgpu`) |
 | `scene`, `shadows`, `dpr`, `fixedStep` | Forwarded to `createRoot` |
 | `frameloop` | `'always'` (default) · `'demand'` (render on `invalidate()`) · `'never'` (only `advance()`) |
 | `events` | `false` to disable pointer events, or `{ filter, onPointerMissed }` |
@@ -82,7 +82,7 @@ services freely.
 
 Inside: `useThree()`, `useFrame()`, `useFixedUpdate()`, `useSize()`,
 `objectRef()` and every three element — see the
-[`@sigx/runtime-three` README](../runtime-three) for elements, props, `args`,
+[`@sigx/three-runtime` README](../three-runtime) for elements, props, `args`,
 `attach`, signal-bound props, pointer events and the performance rules.
 
 Server rendering: the wrapper and canvas render as markup; three never runs

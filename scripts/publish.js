@@ -33,7 +33,7 @@ const rootDir = join(__dirname, '..');
 // live in their own repos under https://github.com/signalxjs and are published
 // from there.
 const PACKAGES = [
-    'packages/runtime-three',
+    'packages/three-runtime',
     'packages/three',
     'packages/three-rapier',
 ];

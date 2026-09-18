@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import * as THREE from 'three';
 import { jsx, component, defineApp } from '@sigx/runtime-core';
-import { objectRef, type ThreeEvent } from '@sigx/runtime-three';
+import { objectRef, type ThreeEvent } from '@sigx/three-runtime';
 import { createTestRoot, type TestRoot } from './harness.js';
 
 /** A unit plane at the origin facing the default camera at z = 5: the canvas centre hits it, a corner misses. */

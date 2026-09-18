@@ -1,5 +1,5 @@
 import { signal, watch } from '@sigx/reactivity';
-import { useThree, type ObjectRef } from '@sigx/runtime-three';
+import { useThree, type ObjectRef } from '@sigx/three-runtime';
 import type { Object3D } from 'three';
 import { frameHook } from '../shared/frame-hook.js';
 import { tryOnDispose } from '../shared/scope.js';

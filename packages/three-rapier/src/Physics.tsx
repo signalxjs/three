@@ -10,7 +10,7 @@
  */
 import { signal, watch } from '@sigx/reactivity';
 import { component, defineProvide, Fragment, jsx, type Define, type JSXElement } from '@sigx/runtime-core';
-import { useFixedUpdate, useFrame } from '@sigx/runtime-three';
+import { useFixedUpdate, useFrame } from '@sigx/three-runtime';
 import type RAPIER from '@dimforge/rapier3d-compat';
 import { useRapier, type Rapier, type RapierContext } from './context.js';
 import { drainEvents } from './events.js';

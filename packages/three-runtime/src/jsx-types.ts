@@ -141,7 +141,7 @@ type ThreeCatalogElements = { [K in ClassKeys as Tag<K & string>]: ThreeNS[K] ex
 /**
  * All three.js intrinsic elements. Augment it for classes you `extend()`:
  *
- *     declare module '@sigx/runtime-three' {
+ *     declare module '@sigx/three-runtime' {
  *         interface ThreeElements { orbitControls: ThreeElement<typeof OrbitControls> }
  *     }
  */

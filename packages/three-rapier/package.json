@@ -49,7 +49,7 @@
         "@dimforge/rapier3d-compat": ">=0.14.0",
         "@sigx/reactivity": "^1.0.0",
         "@sigx/runtime-core": "^1.0.0",
-        "@sigx/runtime-three": "workspace:^",
+        "@sigx/three-runtime": "workspace:^",
         "@sigx/three": "workspace:^",
         "three": ">=0.160.0"
     },
@@ -57,7 +57,7 @@
         "@dimforge/rapier3d-compat": "^0.20.0",
         "@sigx/reactivity": "catalog:",
         "@sigx/runtime-core": "catalog:",
-        "@sigx/runtime-three": "workspace:^",
+        "@sigx/three-runtime": "workspace:^",
         "@sigx/three": "workspace:^",
         "@sigx/vite": "catalog:",
         "@types/node": "^22.0.0",

@@ -35,7 +35,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const rootDir = join(__dirname, '..');
 
 const PACKAGES = [
-    'packages/runtime-three',
+    'packages/three-runtime',
     'packages/three',
     'packages/three-rapier',
 ];
@@ -171,7 +171,7 @@ function main() {
         [
             "import { component, defineApp, signal } from 'sigx';",
             "import { Canvas, useFrame, objectRef } from '@sigx/three';",
-            "import * as runtimeThree from '@sigx/runtime-three';",
+            "import * as threeRuntime from '@sigx/three-runtime';",
             "import * as rapier from '@sigx/three-rapier';",
             "import type { Mesh } from 'three';",
             '',
@@ -200,7 +200,7 @@ function main() {
             '});',
             '',
             'export const app = defineApp(<App />);',
-            'export type _Surface = [typeof runtimeThree, typeof rapier];',
+            'export type _Surface = [typeof threeRuntime, typeof rapier];',
             '',
         ].join('\n')
     );

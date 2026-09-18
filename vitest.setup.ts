@@ -14,7 +14,7 @@ Object.defineProperty(globalThis, '__DEV__', {
 // The version `defineLibConfig` stamps into a package build; all packages here
 // are on one version line (bump-version.js), so any manifest is the truth.
 const { version } = JSON.parse(
-    readFileSync(join(process.cwd(), 'packages/runtime-three/package.json'), 'utf-8')
+    readFileSync(join(process.cwd(), 'packages/three-runtime/package.json'), 'utf-8')
 ) as { version: string };
 Object.defineProperty(globalThis, '__SIGX_VERSION__', {
     configurable: true,

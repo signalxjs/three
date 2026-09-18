@@ -1,5 +1,5 @@
 import { signal } from '@sigx/reactivity';
-import { useThree } from '@sigx/runtime-three';
+import { useThree } from '@sigx/three-runtime';
 import { frameHook, PRIORITY_LAST } from '../shared/frame-hook.js';
 import { isBrowser, noop, tryOnDispose } from '../shared/scope.js';
 import type { ReadSignal, Stop } from '../shared/types.js';

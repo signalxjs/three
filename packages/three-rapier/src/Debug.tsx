@@ -4,7 +4,7 @@
  * `lineSegments`. Development aid: `world.debugRender()` allocates per frame.
  */
 import { component, jsx, type JSXElement } from '@sigx/runtime-core';
-import { useFrame } from '@sigx/runtime-three';
+import { useFrame } from '@sigx/three-runtime';
 import { BufferAttribute, BufferGeometry } from 'three';
 import { useRapier } from './context.js';
 

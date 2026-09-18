@@ -8,7 +8,7 @@
  */
 import { toRaw, watch } from '@sigx/reactivity';
 import { component, defineProvide, jsx, type Define, type JSXElement } from '@sigx/runtime-core';
-import { objectRef } from '@sigx/runtime-three';
+import { objectRef } from '@sigx/three-runtime';
 import { Euler, Quaternion, type Group, type Vector3 } from 'three';
 import type RAPIER from '@dimforge/rapier3d-compat';
 import { autoColliders, applyColliderOptions, type AutoCollider } from './auto-colliders.js';

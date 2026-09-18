@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { signal } from '@sigx/reactivity';
 import { component, type JSXElement } from '@sigx/runtime-core';
 import { Physics, RigidBody, Collider, type RapierContext, type RigidBodyApi, type CollisionPayload } from '@sigx/three-rapier';
-import { createTestRoot, type TestRoot } from '../../runtime-three/__tests__/harness.js';
+import { createTestRoot, type TestRoot } from '../../three-runtime/__tests__/harness.js';
 
 beforeAll(async () => {
     // Warm the wasm once; <Physics> awaits the same module.

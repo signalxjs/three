@@ -39,15 +39,15 @@ export default defineConfig({
     },
     resolve: {
         alias: {
-            // Longest-prefix aliases first, or '@sigx/runtime-three' would
+            // Longest-prefix aliases first, or '@sigx/three-runtime' would
             // swallow its own subpath imports.
-            '@sigx/runtime-three/internals': here('packages/runtime-three/src/internals.ts'),
-            '@sigx/runtime-three/platform': here('packages/runtime-three/src/platform.ts'),
-            '@sigx/runtime-three/jsx-runtime': here('packages/runtime-three/src/jsx-runtime.ts'),
-            '@sigx/runtime-three/jsx-dev-runtime': here('packages/runtime-three/src/jsx-runtime.ts'),
-            '@sigx/runtime-three/webgl': here('packages/runtime-three/src/webgl.ts'),
-            '@sigx/runtime-three/webgpu': here('packages/runtime-three/src/webgpu.ts'),
-            '@sigx/runtime-three': here('packages/runtime-three/src/index.ts'),
+            '@sigx/three-runtime/internals': here('packages/three-runtime/src/internals.ts'),
+            '@sigx/three-runtime/platform': here('packages/three-runtime/src/platform.ts'),
+            '@sigx/three-runtime/jsx-runtime': here('packages/three-runtime/src/jsx-runtime.ts'),
+            '@sigx/three-runtime/jsx-dev-runtime': here('packages/three-runtime/src/jsx-runtime.ts'),
+            '@sigx/three-runtime/webgl': here('packages/three-runtime/src/webgl.ts'),
+            '@sigx/three-runtime/webgpu': here('packages/three-runtime/src/webgpu.ts'),
+            '@sigx/three-runtime': here('packages/three-runtime/src/index.ts'),
             '@sigx/three-rapier': here('packages/three-rapier/src/index.ts'),
             '@sigx/three': here('packages/three/src/index.ts')
         }

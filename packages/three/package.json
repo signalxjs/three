@@ -1,7 +1,7 @@
 {
     "name": "@sigx/three",
     "version": "0.1.0",
-    "description": "three.js for SignalX apps — <Canvas>, useFrame/useThree, asset loading, input and instancing composables on top of @sigx/runtime-three",
+    "description": "three.js for SignalX apps — <Canvas>, useFrame/useThree, asset loading, input and instancing composables on top of @sigx/three-runtime",
     "type": "module",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
@@ -48,7 +48,7 @@
         "node": "^20.19.0 || >=22.12.0"
     },
     "dependencies": {
-        "@sigx/runtime-three": "workspace:^"
+        "@sigx/three-runtime": "workspace:^"
     },
     "peerDependencies": {
         "@sigx/reactivity": "^1.0.0",

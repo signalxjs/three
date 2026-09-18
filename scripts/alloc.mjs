@@ -12,7 +12,7 @@
 import * as THREE from 'three';
 import { batch, signal } from '@sigx/reactivity';
 import { jsx, Fragment } from '@sigx/runtime-core';
-import { createRoot, extend, objectRef } from '../packages/runtime-three/dist/index.js';
+import { createRoot, extend, objectRef } from '../packages/three-runtime/dist/index.js';
 
 if (typeof globalThis.gc !== 'function') {
     console.error('alloc: run with node --expose-gc (pnpm bench:alloc)');
