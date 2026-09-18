@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { jsx, component } from '@sigx/runtime-core';
-import { useFrame, useFixedUpdate, useThree } from '@sigx/runtime-three';
+import { useFrame, useFixedUpdate, useThree } from '@sigx/three-runtime';
 import { createTestRoot } from './harness.js';
 
 describe('frame loop', () => {

@@ -1,5 +1,5 @@
 {
-    "name": "@sigx/runtime-three",
+    "name": "@sigx/three-runtime",
     "version": "0.1.0",
     "description": "three.js renderer for SignalX — scene-graph host ops, frame loop, raycast pointer events and JSX intrinsics",
     "type": "module",
@@ -80,7 +80,7 @@
     "repository": {
         "type": "git",
         "url": "git+https://github.com/signalxjs/three.git",
-        "directory": "packages/runtime-three"
+        "directory": "packages/three-runtime"
     },
     "homepage": "https://sigx.dev/three/",
     "bugs": {

@@ -8,9 +8,9 @@
  * `<mesh>`, `<boxGeometry>`, `<meshStandardMaterial>`, … work out of the box.
  */
 import * as THREE from 'three';
-import { extend } from '@sigx/runtime-three';
-// The JSX intrinsic types ride the runtime-three types entry into ours.
-import '@sigx/runtime-three';
+import { extend } from '@sigx/three-runtime';
+// The JSX intrinsic types ride the three-runtime types entry into ours.
+import '@sigx/three-runtime';
 
 extend(THREE);
 
@@ -61,7 +61,7 @@ export {
     createRoot,
     threeMount,
     ROOT_TOKEN
-} from '@sigx/runtime-three';
+} from '@sigx/three-runtime';
 export type {
     ThreeRoot,
     ThreeState,
@@ -94,4 +94,4 @@ export type {
     EventHandlers,
     NodeProps,
     PrimitiveProps
-} from '@sigx/runtime-three';
+} from '@sigx/three-runtime';

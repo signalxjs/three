@@ -1,4 +1,4 @@
-import { useThree } from '@sigx/runtime-three';
+import { useThree } from '@sigx/three-runtime';
 import { isBrowser, noop } from './scope.js';
 
 /** Runs before the app's `useFrame` callbacks (input polling). */

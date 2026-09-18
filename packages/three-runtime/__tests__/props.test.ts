@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import * as THREE from 'three';
 import { jsx, component, signal } from '@sigx/runtime-core';
 import { batch, computed } from '@sigx/reactivity';
-import { objectRef } from '@sigx/runtime-three';
+import { objectRef } from '@sigx/three-runtime';
 import { createTestRoot } from './harness.js';
 
 describe('props', () => {

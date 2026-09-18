@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import * as THREE from 'three';
 import { jsx, component, defineInjectable, defineProvide, useAppContext, defineApp } from '@sigx/runtime-core';
-import { createRoot, useThree, threeMount, ROOT_TOKEN } from '@sigx/runtime-three';
+import { createRoot, useThree, threeMount, ROOT_TOKEN } from '@sigx/three-runtime';
 import { getProvided } from '@sigx/runtime-core/internals';
 import { createTestRoot, fakeGL, manualScheduler } from './harness.js';
 

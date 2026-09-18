@@ -1,9 +1,9 @@
 /**
- * @sigx/runtime-three — the three.js renderer for SignalX.
+ * @sigx/three-runtime — the three.js renderer for SignalX.
  *
  * This entry is import-safe under Node and registers nothing global: no
  * default mount, no platform element type. Three-only apps opt into those via
- * `@sigx/runtime-three/platform` (or `jsxImportSource: "@sigx/runtime-three"`);
+ * `@sigx/three-runtime/platform` (or `jsxImportSource: "@sigx/three-runtime"`);
  * DOM apps use `<Canvas>` from `@sigx/three`.
  */
 export { createRoot } from './root.js';

@@ -1,5 +1,5 @@
 import { Audio, AudioListener, AudioLoader, PositionalAudio, type Camera } from 'three';
-import { useThree } from '@sigx/runtime-three';
+import { useThree } from '@sigx/three-runtime';
 import { useLoader, type LoaderResult } from './use-loader.js';
 import { tryOnDispose } from '../shared/scope.js';
 import type { MaybeSignal } from '../shared/types.js';

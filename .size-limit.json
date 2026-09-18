@@ -1,7 +1,7 @@
 [
   {
-    "name": "@sigx/runtime-three",
-    "path": "packages/runtime-three/dist/index.js",
+    "name": "@sigx/three-runtime",
+    "path": "packages/three-runtime/dist/index.js",
     "limit": "12 KB",
     "ignore": [
       "three",
@@ -19,7 +19,7 @@
       "@sigx/reactivity",
       "@sigx/runtime-core",
       "@sigx/runtime-dom",
-      "@sigx/runtime-three"
+      "@sigx/three-runtime"
     ]
   },
   {
@@ -33,7 +33,7 @@
       "@sigx/reactivity",
       "@sigx/runtime-core",
       "@sigx/runtime-dom",
-      "@sigx/runtime-three"
+      "@sigx/three-runtime"
     ]
   },
   {
@@ -47,7 +47,7 @@
       "@sigx/reactivity",
       "@sigx/runtime-core",
       "@sigx/runtime-dom",
-      "@sigx/runtime-three"
+      "@sigx/three-runtime"
     ]
   },
   {
@@ -61,7 +61,7 @@
       "@sigx/reactivity",
       "@sigx/runtime-core",
       "@sigx/runtime-dom",
-      "@sigx/runtime-three"
+      "@sigx/three-runtime"
     ]
   },
   {
@@ -75,7 +75,7 @@
       "@sigx/reactivity",
       "@sigx/runtime-core",
       "@sigx/runtime-dom",
-      "@sigx/runtime-three"
+      "@sigx/three-runtime"
     ]
   },
   {
@@ -89,7 +89,7 @@
       "@sigx/reactivity",
       "@sigx/runtime-core",
       "@sigx/runtime-dom",
-      "@sigx/runtime-three"
+      "@sigx/three-runtime"
     ]
   },
   {
@@ -103,7 +103,7 @@
       "@sigx/reactivity",
       "@sigx/runtime-core",
       "@sigx/runtime-dom",
-      "@sigx/runtime-three"
+      "@sigx/three-runtime"
     ]
   },
   {
@@ -115,7 +115,7 @@
       "@dimforge/rapier3d-compat",
       "@sigx/reactivity",
       "@sigx/runtime-core",
-      "@sigx/runtime-three",
+      "@sigx/three-runtime",
       "@sigx/three"
     ]
   }

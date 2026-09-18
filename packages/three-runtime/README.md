@@ -1,6 +1,6 @@
-# @sigx/runtime-three
+# @sigx/three-runtime
 
-[![npm](https://img.shields.io/npm/v/@sigx/runtime-three.svg?label=%40sigx%2Fruntime-three&color=blue)](https://www.npmjs.com/package/@sigx/runtime-three)
+[![npm](https://img.shields.io/npm/v/@sigx/three-runtime.svg?label=%40sigx%2Fthree-runtime&color=blue)](https://www.npmjs.com/package/@sigx/three-runtime)
 
 The three.js renderer for [SignalX](https://sigx.dev): scene-graph host ops on
 top of `@sigx/runtime-core`'s renderer-agnostic component model, a
@@ -10,14 +10,14 @@ types for the whole `three` namespace.
 
 Most apps install [`@sigx/three`](../three) instead — it pulls this package in,
 registers the whole `three` namespace as JSX elements, and adds `<Canvas>` for
-ordinary `sigx` DOM apps plus the composables. Reach for `@sigx/runtime-three`
+ordinary `sigx` DOM apps plus the composables. Reach for `@sigx/three-runtime`
 directly when you mount a three root yourself (`createRoot`), run without a
 DOM, or want to register only the three.js classes you use.
 
 ## Install
 
 ```bash
-pnpm add @sigx/runtime-three three @sigx/reactivity @sigx/runtime-core
+pnpm add @sigx/three-runtime three @sigx/reactivity @sigx/runtime-core
 pnpm add -D @types/three
 ```
 
@@ -27,11 +27,11 @@ pnpm add -D @types/three
 ## Usage
 
 ```tsx
-/** @jsxImportSource @sigx/runtime-three */
+/** @jsxImportSource @sigx/three-runtime */
 import * as THREE from 'three';
 import { component } from '@sigx/runtime-core';
 import { signal } from '@sigx/reactivity';
-import { createRoot, extend, useFrame, objectRef } from '@sigx/runtime-three';
+import { createRoot, extend, useFrame, objectRef } from '@sigx/three-runtime';
 
 extend({ Mesh: THREE.Mesh, BoxGeometry: THREE.BoxGeometry, MeshStandardMaterial: THREE.MeshStandardMaterial, DirectionalLight: THREE.DirectionalLight });
 
@@ -52,7 +52,7 @@ root.render(<><directionalLight position={[3, 3, 3]} /><Cube /></>);
 ```
 
 Or, as an app: `defineApp(<App />).mount({ target: '#canvas', shadows: true }, threeMount)`.
-Importing `@sigx/runtime-three/platform` (which `jsxImportSource: "@sigx/runtime-three"`
+Importing `@sigx/three-runtime/platform` (which `jsxImportSource: "@sigx/three-runtime"`
 does for you) makes `threeMount` the default mount, so plain `.mount('#canvas')` works.
 
 ### Elements
@@ -134,7 +134,7 @@ Both renderers' intrinsics merge in one program, so a `<Canvas>` app types
 HTML and three elements side by side. Register your own classes:
 
 ```ts
-declare module '@sigx/runtime-three' {
+declare module '@sigx/three-runtime' {
     interface ThreeElements { orbitControls: ThreeElement<typeof OrbitControls> }
 }
 ```
@@ -172,8 +172,8 @@ level (`pnpm bench:alloc`: 13 B and −5 B per frame).
 
 | Import | What |
 | --- | --- |
-| `@sigx/runtime-three` | Everything above. Import-safe under Node; registers nothing global. |
-| `@sigx/runtime-three/platform` | Side effects: default mount + platform element type. Three-only apps. |
-| `@sigx/runtime-three/jsx-runtime` | For `jsxImportSource: "@sigx/runtime-three"` (imports `./platform`). |
-| `@sigx/runtime-three/webgl`, `/webgpu` | `gl` factories (`webgpu()` is async and keeps `three/webgpu` out of the main bundle). |
-| `@sigx/runtime-three/internals` | Low-level seams for `@sigx/three`, tests and benches. Unstable. |
+| `@sigx/three-runtime` | Everything above. Import-safe under Node; registers nothing global. |
+| `@sigx/three-runtime/platform` | Side effects: default mount + platform element type. Three-only apps. |
+| `@sigx/three-runtime/jsx-runtime` | For `jsxImportSource: "@sigx/three-runtime"` (imports `./platform`). |
+| `@sigx/three-runtime/webgl`, `/webgpu` | `gl` factories (`webgpu()` is async and keeps `three/webgpu` out of the main bundle). |
+| `@sigx/three-runtime/internals` | Low-level seams for `@sigx/three`, tests and benches. Unstable. |

@@ -24,7 +24,7 @@ Guides, API reference and live examples → **<https://sigx.dev/three/>**
 | Package | Description |
 | --- | --- |
 | [`@sigx/three`](./packages/three) | Install this. `<Canvas>` for any `sigx` app, `useFrame`/`useThree`, asset loading, input, instancing and animation composables. |
-| [`@sigx/runtime-three`](./packages/runtime-three) | The three.js renderer: scene-graph host ops, frame loop, raycast pointer events, JSX intrinsics, `createRoot`/`threeMount`. Pulled in by `@sigx/three`. |
+| [`@sigx/three-runtime`](./packages/three-runtime) | The three.js renderer: scene-graph host ops, frame loop, raycast pointer events, JSX intrinsics, `createRoot`/`threeMount`. Pulled in by `@sigx/three`. |
 | [`@sigx/three-rapier`](./packages/three-rapier) | Rapier physics: `<Physics>`, `<RigidBody>`, `<Collider>`, collision events, debug renderer. |
 
 ## Install

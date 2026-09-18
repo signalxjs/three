@@ -5,10 +5,10 @@
  */
 import { beforeEach } from 'vitest';
 import * as THREE from 'three';
-import { createRoot, extend, type RootOptions, type ThreeRoot, type ThreeState } from '@sigx/runtime-three';
-import { clearCatalog } from '@sigx/runtime-three/internals';
-import type { FrameScheduler } from '@sigx/runtime-three';
-import type { RendererLike } from '@sigx/runtime-three';
+import { createRoot, extend, type RootOptions, type ThreeRoot, type ThreeState } from '@sigx/three-runtime';
+import { clearCatalog } from '@sigx/three-runtime/internals';
+import type { FrameScheduler } from '@sigx/three-runtime';
+import type { RendererLike } from '@sigx/three-runtime';
 
 export interface FakeGL extends RendererLike {
     calls: Array<[THREE.Scene, THREE.Camera]>;

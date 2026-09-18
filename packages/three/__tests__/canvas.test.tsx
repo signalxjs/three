@@ -5,7 +5,7 @@ import { render } from '@sigx/runtime-dom';
 import { component, defineApp, defineInjectable, defineProvide, signal, useAppContext, type JSXElement } from '@sigx/runtime-core';
 import * as THREE from 'three';
 import { Canvas, objectRef, useFrame, useThree, type CanvasApi, type ThreeState } from '@sigx/three';
-import type { RendererLike } from '@sigx/runtime-three';
+import type { RendererLike } from '@sigx/three-runtime';
 
 function fakeGL(): RendererLike & { calls: number; disposed: number } {
     const gl = {

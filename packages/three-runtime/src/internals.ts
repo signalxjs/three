@@ -1,5 +1,5 @@
 /**
- * @sigx/runtime-three internal APIs
+ * @sigx/three-runtime internal APIs
  *
  * ⚠️ Low-level seams for `@sigx/three`, tests and benchmarks. NOT part of
  * the public API and may change without notice.

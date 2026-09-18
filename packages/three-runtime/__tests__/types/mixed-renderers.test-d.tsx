@@ -3,10 +3,10 @@
  * program: a `<Canvas>` app has HTML and three elements in the same file.
  */
 import '@sigx/runtime-dom';
-import '@sigx/runtime-three';
+import '@sigx/three-runtime';
 import { expectTypeOf, test } from 'vitest';
 import type * as THREE from 'three';
-import { objectRef, type ThreeEvent } from '@sigx/runtime-three';
+import { objectRef, type ThreeEvent } from '@sigx/three-runtime';
 import { signal } from '@sigx/reactivity';
 
 test('DOM and three intrinsics coexist', () => {

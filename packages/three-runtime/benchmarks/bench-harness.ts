@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { createRoot, extend, type RootOptions, type ThreeRoot } from '@sigx/runtime-three';
+import { createRoot, extend, type RootOptions, type ThreeRoot } from '@sigx/three-runtime';
 
 extend({
     Mesh: THREE.Mesh,

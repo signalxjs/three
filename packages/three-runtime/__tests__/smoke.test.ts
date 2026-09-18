@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
-describe('@sigx/runtime-three (scaffold)', () => {
+describe('@sigx/three-runtime (scaffold)', () => {
     it('the package entry resolves through the workspace alias', async () => {
-        const mod = await import('@sigx/runtime-three');
+        const mod = await import('@sigx/three-runtime');
         expect(typeof mod).toBe('object');
     });
 

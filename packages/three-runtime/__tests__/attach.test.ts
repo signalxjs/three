@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import * as THREE from 'three';
 import { jsx } from '@sigx/runtime-core';
-import { objectRef } from '@sigx/runtime-three';
+import { objectRef } from '@sigx/three-runtime';
 import { createTestRoot } from './harness.js';
 
 describe('attach', () => {

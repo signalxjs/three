@@ -138,7 +138,7 @@ agents the issue-first flow below is required.)
 
 ```bash
 pnpm install
-pnpm build            # runtime-three → three → three-rapier (each: dev dist + .prod.js dist + tsgo declarations)
+pnpm build            # three-runtime → three → three-rapier (each: dev dist + .prod.js dist + tsgo declarations)
 pnpm test             # vitest run (node environment; <Canvas>/input tests opt into happy-dom per file)
 pnpm test <path>                   # single test file/dir (substring match)
 pnpm test -t "name of test"        # single test by name (vitest -t)
@@ -175,13 +175,13 @@ To run a package script: `pnpm --filter <package-name> <script>`.
 
 ## Packages
 
-- `packages/runtime-three` → `@sigx/runtime-three` — the three.js renderer:
+- `packages/three-runtime` → `@sigx/three-runtime` — the three.js renderer:
   scene-graph host ops on `createRenderer` from `@sigx/runtime-core`, lazy
   object construction, `attach`/`args`, eager zero-alloc `patchProp`,
   signal-bound props, `createRoot` + frame loop (`useFrame`, `useFixedUpdate`,
   demand rendering), raycast pointer events, JSX intrinsic types. Node-import-safe
   main entry; `./platform` is the opt-in side-effect entry (default mount) for
-  DOM-free apps; `./jsx-runtime` for `jsxImportSource: "@sigx/runtime-three"`.
+  DOM-free apps; `./jsx-runtime` for `jsxImportSource: "@sigx/three-runtime"`.
 - `packages/three` → `@sigx/three` — the companion library for ordinary `sigx`
   apps (`jsxImportSource: "sigx"`): `<Canvas>` (a runtime-dom component that
   hosts a three root and bridges provide/inject), `useThree`/`useFrame`
@@ -197,7 +197,7 @@ To run a package script: `pnpm --filter <package-name> <script>`.
   the root with `jsxImportSource: "sigx"`, its own `exclude`, and `../../env.d.ts`
   in `include` (`pnpm typecheck:examples` fails otherwise).
 
-Path aliases: `tsconfig.json` and `vitest.config.ts` map `@sigx/runtime-three`
+Path aliases: `tsconfig.json` and `vitest.config.ts` map `@sigx/three-runtime`
 (+ subpaths), `@sigx/three` and `@sigx/three-rapier` to `packages/*/src`, so
 tests and typecheck run against source, not dist. Longest-prefix aliases first.
 

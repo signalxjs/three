@@ -1,5 +1,5 @@
 import { AnimationMixer, LoopRepeat, type AnimationAction, type AnimationClip, type Object3D } from 'three';
-import { useThree, type ObjectRef } from '@sigx/runtime-three';
+import { useThree, type ObjectRef } from '@sigx/three-runtime';
 import { tryOnDispose } from '../shared/scope.js';
 import { toValue } from '../shared/to-value.js';
 import type { MaybeSignal } from '../shared/types.js';

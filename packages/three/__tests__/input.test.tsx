@@ -2,7 +2,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { component, jsx } from '@sigx/runtime-core';
 import { useActionMap, useKeyboard, useGamepad, usePointer, GamepadAxis, type Keyboard, type ActionMap, type PointerState } from '@sigx/three';
-import { createTestRoot } from '../../runtime-three/__tests__/harness.js';
+import { createTestRoot } from '../../three-runtime/__tests__/harness.js';
 
 function key(type: 'keydown' | 'keyup', code: string, repeat = false): void {
     window.dispatchEvent(new KeyboardEvent(type, { code, repeat }));

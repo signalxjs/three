@@ -1,7 +1,7 @@
 import { bench, describe } from 'vitest';
 import * as THREE from 'three';
 import { jsx, Fragment } from '@sigx/runtime-core';
-import { objectRef } from '@sigx/runtime-three';
+import { objectRef } from '@sigx/three-runtime';
 import { benchRoot, sharedGeometry, sharedMaterial } from './bench-harness.js';
 
 const N = 10_000;

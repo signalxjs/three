@@ -1,5 +1,5 @@
 import { Color, Matrix4, Quaternion, Vector3, type InstancedMesh } from 'three';
-import type { ThreeNode } from '@sigx/runtime-three';
+import type { ThreeNode } from '@sigx/three-runtime';
 
 export interface Instances {
     readonly count: number;

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import * as THREE from 'three';
 import { jsx } from '@sigx/runtime-core';
 import { useInstances } from '@sigx/three';
-import { createTestRoot } from '../../runtime-three/__tests__/harness.js';
+import { createTestRoot } from '../../three-runtime/__tests__/harness.js';
 
 describe('useInstances', () => {
     it('composes typed-array transforms into the instance matrices without allocating per instance', () => {

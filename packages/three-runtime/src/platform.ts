@@ -1,7 +1,7 @@
 /**
  * three.js platform identity — the side effects that make this package THE
  * platform of an app: the default mount registration and the platform
- * element type. Built as its own dist entry (`@sigx/runtime-three/platform`)
+ * element type. Built as its own dist entry (`@sigx/three-runtime/platform`)
  * and named in `sideEffects`.
  *
  * Only three-only apps reach this (through `./jsx-runtime`); a `<Canvas>`
