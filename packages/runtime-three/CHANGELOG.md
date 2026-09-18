@@ -44,3 +44,15 @@ follow [Semantic Versioning](https://semver.org/).
   with `@sigx/runtime-dom`.
 - Benchmarks (`pnpm bench`: mount, per-frame update paths, keyed reorder,
   instancing) and the per-frame allocation check (`pnpm bench:alloc`).
+
+### Changed
+
+- Aligned with sigx core 1.0: peers on `@sigx/reactivity` and `@sigx/runtime-core` at `^1.0.0`.
+- `children` is no longer a drivable prop key of `ThreeElement<T>` / `Mutable<O>`.
+  `Object3D.children` is a writable array, so it was picked up as
+  `Bindable<Object3D[]>` and intersected with the JSX `children` slot into a type
+  nothing satisfies. Core 0.15 never shipped `JSX.ElementChildrenAttribute`
+  (signalxjs/core#529), so JSX children were never checked and the collision
+  stayed hidden; core 1.0 ships it, and every `<mesh>…</mesh>` with children
+  became a type error. The runtime never read a `children` prop, so nothing
+  changes at runtime.

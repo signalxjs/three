@@ -26,9 +26,9 @@ test('DOM and three intrinsics coexist', () => {
             <primitive object={{}} />
         </div>
     );
-    // (`JSX.Element` itself is not asserted: the published @sigx/runtime-core
-    // 0.15.6 types are missing jsx-types.d.ts — fixed on core main.)
-    void tree;
+    // core 1.0 ships `JSX.Element` (and `ElementChildrenAttribute`, which is
+    // what makes the nested elements above typecheck as children at all).
+    expectTypeOf(tree).toEqualTypeOf<JSX.Element>();
     expectTypeOf(mesh.current).toEqualTypeOf<THREE.Mesh | null>();
 
     // three's Line is `threeLine`; `line` is the SVG element

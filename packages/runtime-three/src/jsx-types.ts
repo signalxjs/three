@@ -43,14 +43,21 @@ export type Bindable<T> = T | { readonly value: T } | (() => T);
 type IfEquals<X, Y, A, B> = (<T>() => T extends X ? 1 : 2) extends (<T>() => T extends Y ? 1 : 2) ? A : B;
 /** Math-typed properties are `readonly` in three's typings (fixed identity) but are SET IN PLACE by the renderer. */
 type InPlaceValue = THREE.Vector2 | THREE.Vector3 | THREE.Vector4 | THREE.Euler | THREE.Quaternion | THREE.Matrix3 | THREE.Matrix4 | THREE.Color | THREE.Layers;
-/** Keys a prop can drive: writable non-methods, plus readonly math objects (updated in place). */
+/**
+ * Keys a prop can drive: writable non-methods, plus readonly math objects
+ * (updated in place). `children` is never one: `Object3D.children` is a
+ * writable array, but JSX children reach the object through the host ops,
+ * not through a prop, and the JSX `children` slot is typed by `NodeProps`.
+ * Left in, the two intersect into a `children` type nothing satisfies — masked
+ * until core 1.0 shipped `JSX.ElementChildrenAttribute` (signalxjs/core#529).
+ */
 type PropKeys<O> = {
-    [K in keyof O]-?: O[K] extends (...args: any[]) => any
+    [K in Exclude<keyof O, 'children'>]-?: O[K] extends (...args: any[]) => any
         ? never
         : NonNullable<O[K]> extends InPlaceValue
             ? K
             : IfEquals<{ [Q in K]: O[K] }, { -readonly [Q in K]: O[K] }, K, never>;
-}[keyof O];
+}[Exclude<keyof O, 'children'>];
 
 /** Every drivable property, optional and bindable, with math coercion. */
 export type Mutable<O> = { [K in PropKeys<O>]?: Bindable<MathValue<O[K]>> };
