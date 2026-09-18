@@ -156,7 +156,7 @@ pnpm lint             # oxlint over the packages' src
 pnpm lint:fix
 pnpm size             # size-limit bundle-size check (.size-limit.json; three/rapier/@sigx peers ignored)
 pnpm verify:pack      # pack every package, install the tarballs in a scratch `sigx` app, typecheck it
-pnpm verify:catalog   # every core dep goes through the single-minor catalog (CI gate)
+pnpm verify:catalog   # every core dep goes through the one-release-line catalog (CI gate)
 pnpm sync:core [X.Y]  # align the catalog's core pins to a core minor; --check is a drift guard
 pnpm version:check    # all publishable packages on one version line (CI gate)
 pnpm dev:cube | dev:hud | dev:physics   # run an example app
