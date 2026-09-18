@@ -5,15 +5,15 @@ packages:
 # Single source of truth for the SignalX core version this repo consumes.
 # Every package references these as "catalog:", which pnpm rewrites to the
 # range below on pack/publish. Core keeps reactive state in module-local
-# variables, so exactly ONE physical copy must resolve — the ^0.15.0
-# (>=0.15.0 <0.16.0) single-minor pin forces pnpm to hoist one copy.
+# variables, so exactly ONE physical copy must resolve — the ^1.0.0
+# (>=1.0.0 <2.0.0) single-minor pin forces pnpm to hoist one copy.
 # `pnpm sync:core` rewrites these pins and this comment together.
 catalog:
-  '@sigx/reactivity': ^0.15.0
-  '@sigx/runtime-core': ^0.15.0
-  '@sigx/runtime-dom': ^0.15.0
-  '@sigx/vite': ^0.15.0
-  sigx: ^0.15.0
+  '@sigx/reactivity': ^1.0.0
+  '@sigx/runtime-core': ^1.0.0
+  '@sigx/runtime-dom': ^1.0.0
+  '@sigx/vite': ^1.0.0
+  sigx: ^1.0.0
 
 onlyBuiltDependencies:
   - esbuild

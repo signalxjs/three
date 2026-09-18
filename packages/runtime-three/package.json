@@ -1,7 +1,7 @@
 {
     "name": "@sigx/runtime-three",
     "version": "0.1.0",
-    "description": "three.js renderer for SignalX \u2014 scene-graph host ops, frame loop, raycast pointer events and JSX intrinsics",
+    "description": "three.js renderer for SignalX — scene-graph host ops, frame loop, raycast pointer events and JSX intrinsics",
     "type": "module",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
@@ -90,8 +90,8 @@
         "node": "^20.19.0 || >=22.12.0"
     },
     "peerDependencies": {
-        "@sigx/reactivity": "^0.15.0",
-        "@sigx/runtime-core": "^0.15.0",
+        "@sigx/reactivity": "^1.0.0",
+        "@sigx/runtime-core": "^1.0.0",
         "three": ">=0.160.0"
     },
     "devDependencies": {
