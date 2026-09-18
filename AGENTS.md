@@ -163,8 +163,9 @@ pnpm dev:cube | dev:hud | dev:physics   # run an example app
 ```
 
 Core packages (`@sigx/reactivity`, `@sigx/runtime-core`, `@sigx/runtime-dom`,
-`@sigx/vite`, `sigx`) are pinned to a **single minor** in the `catalog:` block
-of `pnpm-workspace.yaml`. Publishable packages peer on the core singletons at
+`@sigx/vite`, `sigx`) are pinned to **one release line** (`^1.0.0`: a single
+major, additive minors allowed — a single minor while core was on 0.x) in the
+`catalog:` block of `pnpm-workspace.yaml`. Publishable packages peer on the core singletons at
 the range the catalog derives (`^1.0.0`) with a `devDependencies: "catalog:"`
 twin; examples keep them in `dependencies` as `"catalog:"`. `pnpm verify:catalog`
 enforces the shape in CI. On a core release, `.github/workflows/core-sync.yml`
