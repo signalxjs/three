@@ -47,8 +47,8 @@
     },
     "peerDependencies": {
         "@dimforge/rapier3d-compat": ">=0.14.0",
-        "@sigx/reactivity": "^0.15.0",
-        "@sigx/runtime-core": "^0.15.0",
+        "@sigx/reactivity": "^1.0.0",
+        "@sigx/runtime-core": "^1.0.0",
         "@sigx/runtime-three": "workspace:^",
         "@sigx/three": "workspace:^",
         "three": ">=0.160.0"

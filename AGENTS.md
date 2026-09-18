@@ -156,16 +156,17 @@ pnpm lint             # oxlint over the packages' src
 pnpm lint:fix
 pnpm size             # size-limit bundle-size check (.size-limit.json; three/rapier/@sigx peers ignored)
 pnpm verify:pack      # pack every package, install the tarballs in a scratch `sigx` app, typecheck it
-pnpm verify:catalog   # every core dep goes through the single-minor catalog (CI gate)
+pnpm verify:catalog   # every core dep goes through the one-release-line catalog (CI gate)
 pnpm sync:core [X.Y]  # align the catalog's core pins to a core minor; --check is a drift guard
 pnpm version:check    # all publishable packages on one version line (CI gate)
 pnpm dev:cube | dev:hud | dev:physics   # run an example app
 ```
 
 Core packages (`@sigx/reactivity`, `@sigx/runtime-core`, `@sigx/runtime-dom`,
-`@sigx/vite`, `sigx`) are pinned to a **single minor** in the `catalog:` block
-of `pnpm-workspace.yaml`. Publishable packages peer on the core singletons at
-the range the catalog derives (`^0.15.0`) with a `devDependencies: "catalog:"`
+`@sigx/vite`, `sigx`) are pinned to **one release line** (`^1.0.0`: a single
+major, additive minors allowed — a single minor while core was on 0.x) in the
+`catalog:` block of `pnpm-workspace.yaml`. Publishable packages peer on the core singletons at
+the range the catalog derives (`^1.0.0`) with a `devDependencies: "catalog:"`
 twin; examples keep them in `dependencies` as `"catalog:"`. `pnpm verify:catalog`
 enforces the shape in CI. On a core release, `.github/workflows/core-sync.yml`
 runs `sync:core` and opens an alignment PR automatically.

@@ -28,3 +28,7 @@ All notable changes to `@sigx/three` are documented here. The format follows
   `useAnimations`.
 - `toValue` and the `MaybeSignal` / `ReadSignal` / `Stop` vocabulary.
 - `examples/game-hud`.
+
+### Changed
+
+- Aligned with sigx core 1.0: peers on `@sigx/reactivity`, `@sigx/runtime-core` and `@sigx/runtime-dom` at `^1.0.0`.

@@ -20,3 +20,7 @@ follow [Semantic Versioning](https://semver.org/).
   it exists) or standalone fixed colliders, with events.
 - `<Debug>` line renderer, `useRapier()`, `useBodyHandle()`.
 - `examples/physics-playground`.
+
+### Changed
+
+- Aligned with sigx core 1.0: peers on `@sigx/reactivity` and `@sigx/runtime-core` at `^1.0.0`.
