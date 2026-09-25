@@ -45,7 +45,7 @@
     "devDependencies": {
         "@sigx/runtime-dom": "catalog:",
         "@size-limit/preset-small-lib": "^11",
-        "@types/node": "^22.0.0",
+        "@types/node": "^26.6.2",
         "@types/three": "^0.185.4",
         "@typescript/native-preview": "7.0.0-dev.20260517.1",
         "@vitest/coverage-v8": "^4.1.5",

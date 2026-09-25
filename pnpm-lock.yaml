@@ -33,8 +33,8 @@ importers:
         specifier: ^11
         version: 11.2.0(size-limit@11.2.0)
       '@types/node':
-        specifier: ^22.0.0
-        version: 22.20.2
+        specifier: ^26.6.2
+        version: 26.6.2
       '@types/three':
         specifier: ^0.185.4
         version: 0.185.4
@@ -61,10 +61,10 @@ importers:
         version: 6.0.3
       vite:
         specifier: ^8.0.11
-        version: 8.3.0(@types/node@22.20.2)(jiti@2.7.0)
+        version: 8.3.0(@types/node@26.6.2)(jiti@2.7.0)
       vitest:
         specifier: ^4.1.5
-        version: 4.1.11(@types/node@22.20.2)(@vitest/coverage-v8@4.1.11)(happy-dom@20.14.3)(vite@8.3.0(@types/node@22.20.2)(jiti@2.7.0))
+        version: 4.1.11(@types/node@26.6.2)(@vitest/coverage-v8@4.1.11)(happy-dom@20.14.3)(vite@8.3.0(@types/node@26.6.2)(jiti@2.7.0))
 
   examples/game-hud:
     dependencies:
@@ -80,7 +80,7 @@ importers:
     devDependencies:
       '@sigx/vite':
         specifier: 'catalog:'
-        version: 1.0.0(sigx@1.0.0)(vite@8.3.0(@types/node@22.20.2)(jiti@2.7.0))
+        version: 1.0.0(sigx@1.0.0)(vite@8.3.0(@types/node@26.6.2)(jiti@2.7.0))
       '@types/three':
         specifier: ^0.185.4
         version: 0.185.4
@@ -89,7 +89,7 @@ importers:
         version: 6.0.3
       vite:
         specifier: ^8.0.11
-        version: 8.3.0(@types/node@22.20.2)(jiti@2.7.0)
+        version: 8.3.0(@types/node@26.6.2)(jiti@2.7.0)
 
   examples/physics-playground:
     dependencies:
@@ -111,7 +111,7 @@ importers:
     devDependencies:
       '@sigx/vite':
         specifier: 'catalog:'
-        version: 1.0.0(sigx@1.0.0)(vite@8.3.0(@types/node@22.20.2)(jiti@2.7.0))
+        version: 1.0.0(sigx@1.0.0)(vite@8.3.0(@types/node@26.6.2)(jiti@2.7.0))
       '@types/three':
         specifier: ^0.185.4
         version: 0.185.4
@@ -120,7 +120,7 @@ importers:
         version: 6.0.3
       vite:
         specifier: ^8.0.11
-        version: 8.3.0(@types/node@22.20.2)(jiti@2.7.0)
+        version: 8.3.0(@types/node@26.6.2)(jiti@2.7.0)
 
   examples/spinning-cube:
     dependencies:
@@ -136,7 +136,7 @@ importers:
     devDependencies:
       '@sigx/vite':
         specifier: 'catalog:'
-        version: 1.0.0(sigx@1.0.0)(vite@8.3.0(@types/node@22.20.2)(jiti@2.7.0))
+        version: 1.0.0(sigx@1.0.0)(vite@8.3.0(@types/node@26.6.2)(jiti@2.7.0))
       '@types/three':
         specifier: ^0.185.4
         version: 0.185.4
@@ -145,7 +145,7 @@ importers:
         version: 6.0.3
       vite:
         specifier: ^8.0.11
-        version: 8.3.0(@types/node@22.20.2)(jiti@2.7.0)
+        version: 8.3.0(@types/node@26.6.2)(jiti@2.7.0)
 
   packages/three:
     dependencies:
@@ -164,10 +164,10 @@ importers:
         version: 1.0.0(@sigx/reactivity@1.0.0)(@sigx/runtime-core@1.0.0(@sigx/reactivity@1.0.0))
       '@sigx/vite':
         specifier: 'catalog:'
-        version: 1.0.0(sigx@1.0.0)(vite@8.3.0(@types/node@22.20.2)(jiti@2.7.0))
+        version: 1.0.0(sigx@1.0.0)(vite@8.3.0(@types/node@26.6.2)(jiti@2.7.0))
       '@types/node':
-        specifier: ^22.0.0
-        version: 22.20.2
+        specifier: ^26.6.2
+        version: 26.6.2
       '@types/three':
         specifier: ^0.185.4
         version: 0.185.4
@@ -179,7 +179,7 @@ importers:
         version: 6.0.3
       vite:
         specifier: ^8.0.11
-        version: 8.3.0(@types/node@22.20.2)(jiti@2.7.0)
+        version: 8.3.0(@types/node@26.6.2)(jiti@2.7.0)
 
   packages/three-rapier:
     devDependencies:
@@ -200,10 +200,10 @@ importers:
         version: link:../three-runtime
       '@sigx/vite':
         specifier: 'catalog:'
-        version: 1.0.0(sigx@1.0.0)(vite@8.3.0(@types/node@22.20.2)(jiti@2.7.0))
+        version: 1.0.0(sigx@1.0.0)(vite@8.3.0(@types/node@26.6.2)(jiti@2.7.0))
       '@types/node':
-        specifier: ^22.0.0
-        version: 22.20.2
+        specifier: ^26.6.2
+        version: 26.6.2
       '@types/three':
         specifier: ^0.185.4
         version: 0.185.4
@@ -215,7 +215,7 @@ importers:
         version: 6.0.3
       vite:
         specifier: ^8.0.11
-        version: 8.3.0(@types/node@22.20.2)(jiti@2.7.0)
+        version: 8.3.0(@types/node@26.6.2)(jiti@2.7.0)
 
   packages/three-runtime:
     devDependencies:
@@ -227,10 +227,10 @@ importers:
         version: 1.0.0(@sigx/reactivity@1.0.0)
       '@sigx/vite':
         specifier: 'catalog:'
-        version: 1.0.0(sigx@1.0.0)(vite@8.3.0(@types/node@22.20.2)(jiti@2.7.0))
+        version: 1.0.0(sigx@1.0.0)(vite@8.3.0(@types/node@26.6.2)(jiti@2.7.0))
       '@types/node':
-        specifier: ^22.0.0
-        version: 22.20.2
+        specifier: ^26.6.2
+        version: 26.6.2
       '@types/three':
         specifier: ^0.185.4
         version: 0.185.4
@@ -242,7 +242,7 @@ importers:
         version: 6.0.3
       vite:
         specifier: ^8.0.11
-        version: 8.3.0(@types/node@22.20.2)(jiti@2.7.0)
+        version: 8.3.0(@types/node@26.6.2)(jiti@2.7.0)
 
 packages:
 
@@ -736,8 +736,8 @@ packages:
   '@types/estree@1.0.9':
     resolution: {integrity: sha512-GhdPgy1el4/ImP05X05Uw4cw2/M93BCUmnEvWZNStlCzEKME4Fkk+YpoA5OiHNQmoS7Cafb8Xa3Pya8m1Qrzeg==}
 
-  '@types/node@22.20.2':
-    resolution: {integrity: sha512-xlvWf4Vs9n1PEVYwP1n4vvG07M6y8WgvJ2t0vbrWTmijsIHp1cS+uJ2kMIRdY3nHZK0nCYKrPeD171+SzF4/zw==}
+  '@types/node@26.6.2':
+    resolution: {integrity: sha512-X1P21scMv4zGKLYqjdGjaKa7COa0RKVYYZZN/NfvLQ1JegxFhdhpZG/Lyn8AXx6CDUavKAd11v6BvfpkDByK8g==}
 
   '@types/stats.js@0.17.4':
     resolution: {integrity: sha512-jIBvWWShCvlBqBNIZt0KAshWpvSjhkwkEu4ZUcASoAvhmrgAUI2t1dXrjSL4xXVLB4FznPrIsX3nKXFl/Dt4vA==}
@@ -1133,8 +1133,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  undici-types@6.21.0:
-    resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
+  undici-types@8.9.0:
+    resolution: {integrity: sha512-KTDyRTYX8sWmKXAikPHHSyc63CRPETMctyjKFupcC6OBLXT3xsN0e9aF7m+mIXutFWpUXuedtowG7iLOzp0kQg==}
 
   vite@8.3.0:
     resolution: {integrity: sha512-lhZBVvEHefgE+HQZC9O7EBJgCU/nVzFNl7vkS4RE0APtWLP02/8QVIkQtzBxPquh7lq5/78NHipTj7ODQ6XuyQ==}
@@ -1469,10 +1469,10 @@ snapshots:
 
   '@sigx/serialize@1.0.0': {}
 
-  '@sigx/vite@1.0.0(sigx@1.0.0)(vite@8.3.0(@types/node@22.20.2)(jiti@2.7.0))':
+  '@sigx/vite@1.0.0(sigx@1.0.0)(vite@8.3.0(@types/node@26.6.2)(jiti@2.7.0))':
     dependencies:
       sigx: 1.0.0
-      vite: 8.3.0(@types/node@22.20.2)(jiti@2.7.0)
+      vite: 8.3.0(@types/node@26.6.2)(jiti@2.7.0)
 
   '@size-limit/esbuild@11.2.0(size-limit@11.2.0)':
     dependencies:
@@ -1503,9 +1503,9 @@ snapshots:
 
   '@types/estree@1.0.9': {}
 
-  '@types/node@22.20.2':
+  '@types/node@26.6.2':
     dependencies:
-      undici-types: 6.21.0
+      undici-types: 8.9.0
 
   '@types/stats.js@0.17.4': {}
 
@@ -1524,7 +1524,7 @@ snapshots:
 
   '@types/ws@8.18.1':
     dependencies:
-      '@types/node': 22.20.2
+      '@types/node': 26.6.2
 
   '@typescript/native-preview-darwin-arm64@7.0.0-dev.20260517.1':
     optional: true
@@ -1569,7 +1569,7 @@ snapshots:
       obug: 2.2.1
       std-env: 4.2.0
       tinyrainbow: 3.1.1
-      vitest: 4.1.11(@types/node@22.20.2)(@vitest/coverage-v8@4.1.11)(happy-dom@20.14.3)(vite@8.3.0(@types/node@22.20.2)(jiti@2.7.0))
+      vitest: 4.1.11(@types/node@26.6.2)(@vitest/coverage-v8@4.1.11)(happy-dom@20.14.3)(vite@8.3.0(@types/node@26.6.2)(jiti@2.7.0))
 
   '@vitest/expect@4.1.11':
     dependencies:
@@ -1580,13 +1580,13 @@ snapshots:
       chai: 6.2.2
       tinyrainbow: 3.1.1
 
-  '@vitest/mocker@4.1.11(vite@8.3.0(@types/node@22.20.2)(jiti@2.7.0))':
+  '@vitest/mocker@4.1.11(vite@8.3.0(@types/node@26.6.2)(jiti@2.7.0))':
     dependencies:
       '@vitest/spy': 4.1.11
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 8.3.0(@types/node@22.20.2)(jiti@2.7.0)
+      vite: 8.3.0(@types/node@26.6.2)(jiti@2.7.0)
 
   '@vitest/pretty-format@4.1.11':
     dependencies:
@@ -1622,7 +1622,7 @@ snapshots:
 
   buffer-image-size@0.6.4:
     dependencies:
-      '@types/node': 22.20.2
+      '@types/node': 26.6.2
 
   bytes-iec@3.1.1: {}
 
@@ -1686,7 +1686,7 @@ snapshots:
 
   happy-dom@20.14.3:
     dependencies:
-      '@types/node': 22.20.2
+      '@types/node': 26.6.2
       '@types/whatwg-mimetype': 3.0.2
       '@types/ws': 8.18.1
       buffer-image-size: 0.6.4
@@ -1897,9 +1897,9 @@ snapshots:
 
   typescript@6.0.3: {}
 
-  undici-types@6.21.0: {}
+  undici-types@8.9.0: {}
 
-  vite@8.3.0(@types/node@22.20.2)(jiti@2.7.0):
+  vite@8.3.0(@types/node@26.6.2)(jiti@2.7.0):
     dependencies:
       lightningcss: 1.33.0
       picomatch: 4.0.7
@@ -1907,14 +1907,14 @@ snapshots:
       rolldown: 1.2.8
       tinyglobby: 0.2.17
     optionalDependencies:
-      '@types/node': 22.20.2
+      '@types/node': 26.6.2
       fsevents: 2.3.3
       jiti: 2.7.0
 
-  vitest@4.1.11(@types/node@22.20.2)(@vitest/coverage-v8@4.1.11)(happy-dom@20.14.3)(vite@8.3.0(@types/node@22.20.2)(jiti@2.7.0)):
+  vitest@4.1.11(@types/node@26.6.2)(@vitest/coverage-v8@4.1.11)(happy-dom@20.14.3)(vite@8.3.0(@types/node@26.6.2)(jiti@2.7.0)):
     dependencies:
       '@vitest/expect': 4.1.11
-      '@vitest/mocker': 4.1.11(vite@8.3.0(@types/node@22.20.2)(jiti@2.7.0))
+      '@vitest/mocker': 4.1.11(vite@8.3.0(@types/node@26.6.2)(jiti@2.7.0))
       '@vitest/pretty-format': 4.1.11
       '@vitest/runner': 4.1.11
       '@vitest/snapshot': 4.1.11
@@ -1931,10 +1931,10 @@ snapshots:
       tinyexec: 1.3.1
       tinyglobby: 0.2.17
       tinyrainbow: 3.1.1
-      vite: 8.3.0(@types/node@22.20.2)(jiti@2.7.0)
+      vite: 8.3.0(@types/node@26.6.2)(jiti@2.7.0)
       why-is-node-running: 2.3.0
     optionalDependencies:
-      '@types/node': 22.20.2
+      '@types/node': 26.6.2
       '@vitest/coverage-v8': 4.1.11(vitest@4.1.11)
       happy-dom: 20.14.3
     transitivePeerDependencies:

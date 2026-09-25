@@ -98,7 +98,7 @@
         "@sigx/reactivity": "catalog:",
         "@sigx/runtime-core": "catalog:",
         "@sigx/vite": "catalog:",
-        "@types/node": "^22.0.0",
+        "@types/node": "^26.6.2",
         "@types/three": "^0.185.4",
         "three": "^0.186.0",
         "typescript": "^6.0.3",
