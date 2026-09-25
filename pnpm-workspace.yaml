@@ -10,11 +10,11 @@ packages:
 # (on 1.x a caret admits additive minors; on 0.x it was a single minor).
 # `pnpm sync:core` rewrites these pins and this comment together.
 catalog:
-  '@sigx/reactivity': ^1.0.0
-  '@sigx/runtime-core': ^1.0.0
-  '@sigx/runtime-dom': ^1.0.0
-  '@sigx/vite': ^1.0.0
-  sigx: ^1.0.0
+  '@sigx/reactivity': ^1.0.1
+  '@sigx/runtime-core': ^1.0.1
+  '@sigx/runtime-dom': ^1.0.1
+  '@sigx/vite': ^1.0.1
+  sigx: ^1.0.1
 
 onlyBuiltDependencies:
   - esbuild
