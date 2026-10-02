@@ -54,7 +54,7 @@
         "three": ">=0.160.0"
     },
     "devDependencies": {
-        "@dimforge/rapier3d-compat": "^0.20.0",
+        "@dimforge/rapier3d-compat": "^0.21.0",
         "@sigx/reactivity": "catalog:",
         "@sigx/runtime-core": "catalog:",
         "@sigx/three-runtime": "workspace:^",
@@ -62,7 +62,7 @@
         "@sigx/vite": "catalog:",
         "@types/node": "^22.0.0",
         "@types/three": "^0.185.4",
-        "three": "^0.186.0",
+        "three": "^0.186.1",
         "typescript": "^6.0.3",
         "vite": "^8.0.11"
     },
